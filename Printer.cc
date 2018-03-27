@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Printer.h"
 
-using name space std;
+using namespace std;
 
 Printer::Printer( 
 	unsigned int numStudents, 
@@ -12,34 +12,37 @@ numVendingMachines( numVendingMachines ),
 numCouriers( numCouriers ){
 	total = numStudents + numVendingMachines + numCouriers + 6;
 	cout << "Parent";
-	cout << '\t' << "Groupoff";
+	cout << '\t' << "Gropoff";
 	cout << '\t' << "WATOff";
 	cout << '\t' << "Names";
 	cout << '\t' << "Truck";
 	cout << '\t' << "Plant";
-	for ( int i = 0; i < numStudents; ++i ){
+	for ( unsigned int i = 0; i < numStudents; ++i ){
 		cout << '\t' << "Stud" << i;
 	}	// for
-	for ( int i = 0; i < numVendingMachines; ++i ){
+	for ( unsigned int i = 0; i < numVendingMachines; ++i ){
 		cout << '\t' << "Mach" << i;
 	}	// for
-	for ( int i = 0; i < numCouriers; ++i ){
+	for ( unsigned int i = 0; i < numCouriers; ++i ){
 		cout << '\t' << "Cour" << i;
 	}	// for
-
-	for ( int i = 0; i < 6; ++i ) {
+	cout << endl;
+	for ( unsigned int i = 0; i < total; ++i ) {
 		if ( i ) {
 			cout << '\t';
 		}	// if
 		cout << "*******";
 	}	// for
+	cout << endl;
 }
 
 Printer::~Printer() {
 	cout << "***********************" << endl;
 }
 
-void Printer::print( Kind kind, char state ){};
+void Printer::print( Kind kind, char state ){
+
+};
 
 void Printer::print( Kind kind, char state, int value1 ){};
 

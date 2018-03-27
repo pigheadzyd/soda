@@ -1,4 +1,4 @@
-#pragma once
+//#pragma once
 
 struct ConfigParms {
     unsigned int sodaCost;				// MSRP per bottle
