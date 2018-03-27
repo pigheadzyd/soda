@@ -1,0 +1,22 @@
+OUTPUT:=OUTPUT
+
+CXX = u++					# compiler
+CXXFLAGS = -g -multi -O2 -std=c++11 -Wall -Wextra -MMD -D${KIND} -D${OUTPUT} # compiler flags
+MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
+
+OBJECTS1 = print.o main.o # list of object files for question 1 prefixed with "q1"
+EXEC1 = soda
+
+OBJECTS = ${OBJECTS1}				# all object files
+DEPENDS = ${OBJECTS:.o=.d}			# substitute ".o" with ".d"
+EXECS = ${EXEC1}				# all executables
+
+#############################################################
+
+
+${OBJECTS} : ${MAKEFILE_NAME}			# OPTIONAL : changes to this file => recompile
+
+-include ${DEPENDS}				# include *.d files containing program dependences
+
+clean :						# remove files that can be regenerated
+	rm -f *.d *.o ${EXECS} 
