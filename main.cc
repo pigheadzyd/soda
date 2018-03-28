@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string.h>
-#include <vector>
 
 #include "Printer.h"
 #include "config.h"
+#include "MPRNG.h"
 
 using namespace std;
+
+MPRNG mprng;
+
 
 int main(int argc, char const *argv[]){
 	
