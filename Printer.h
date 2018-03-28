@@ -35,7 +35,6 @@ _Monitor Printer {
     void setState( unsigned int index, char state, int value1, int value2 );
     unsigned int getIndex( Kind kind );
     unsigned int getIndex( Kind kind, unsigned int lid );
-
 };
 
 #endif
