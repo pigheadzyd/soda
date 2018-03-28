@@ -9,7 +9,7 @@ Printer::Printer(
 	unsigned int numCouriers ):
 numStudents( numStudents ), 
 numVendingMachines( numVendingMachines ), 
-numCouriers( numCouriers ), total(0) {
+numCouriers( numCouriers ), total( 0 ) {
 	cout << "Parent";
 	indexMap[Parent] = total++;
 
