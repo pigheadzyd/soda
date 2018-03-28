@@ -98,7 +98,7 @@ unsigned int Printer::getIndex( Kind kind, unsigned int lid ) {
 }	// unsigned int Printer::getIndex
 
 void Printer::setState( unsigned int index, char state ) {
-	if ( printInfo[index].update ) {
+	if ( printInfo[index].update ) {		// check if the setState has buffer or not
 		flush();
 	}	// if
 
@@ -125,7 +125,7 @@ void Printer::print( Kind kind, char state ) {
 
 void Printer::print( Kind kind, char state, int value1 ) {
 	unsigned int index = getIndex( kind );
-	setState( index, state, value1);
+	setState( index, state, value1 );
 }	// void Printer::print
 
 void Printer::print( Kind kind, char state, int value1, int value2 ) {
