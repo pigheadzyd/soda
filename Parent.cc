@@ -23,14 +23,14 @@ Parent::~Parent() {
 void Parent::main() {
 	prt.print( Printer::Parent, 'S' );
 	for ( ;; ) {
-		_Accept ( ~Parent ) {
+		_Accept ( ~Parent ) {		// allow to break the loop
 			break;
 		} _Else {
 			yield( parentalDelay );
 			unsigned int id = mprng( numStudents - 1 );
 			unsigned int amount = mprng ( 1, 3 );
-			prt.print( Printer::Parent, 'D', id, amount );
 			bank.deposit( id, amount );
+			prt.print( Printer::Parent, 'D', id, amount );
 		}	// _Accept
 	}	// for
 }	// void Parent::main
