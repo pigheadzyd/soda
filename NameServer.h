@@ -12,11 +12,12 @@ _Task NameServer {
     VendingMachine ** getMachineList();
   private:
   	Printer & prt;
-  	int curIndex;
-  	int curRegister;
-  	unsigned int numVendingMachines;
-  	unsigned int numStudents;
-  	VendingMachine ** vendingMachineList;
+  	// int curIndex;
+  	// int curRegister;
+  	unsigned int numVendingMachines;                 	// number of total machines
+  	unsigned int numStudents;                        	// number of total students
+  	VendingMachine ** vendingMachineList;            	// map machine id to machine pointer
+    unsigned int *machineOfStudent;                		// map student to machine id which is managed saperately
   	void main();
 };
 
