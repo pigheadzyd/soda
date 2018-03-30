@@ -1,8 +1,12 @@
 #include <iostream>
 #include <string.h>
 
-#include "Printer.h"
 #include "config.h"
+#include "Bank.h"
+#include "Parent.h"
+#include "Printer.h"
+#include "test1.cc"
+#include "test2.cc"
 #include "MPRNG.h"
 
 using namespace std;
@@ -34,8 +38,16 @@ int main(int argc, char const *argv[]){
 	std::strcpy( configFile, tempFile.c_str() );
 	processConfigFile( configFile, configParms );
 
-
 	Printer printer ( configParms.numStudents, configParms.numVendingMachines, configParms.numCouriers );
+	Bank bank ( configParms.numStudents );
+	//Test1 test1 ( bank );
+	Parent parent ( printer, bank, configParms.numStudents, configParms.parentalDelay );
+	Test2 test2 ( printer, bank );
+
+	// bank.deposit( 0, 1 );
+	// bank.withdraw( 0, 3 );
+	// bank.deposit( 0, 2 );
+	
 
 	// printer.print( Printer::Parent, 'c' );
 	// printer.print( Printer::Student, 0, 'c', 1 );
