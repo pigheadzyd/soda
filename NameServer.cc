@@ -13,7 +13,7 @@ NameServer::NameServer(
 	numStudents( numStudents ) {
 		vendingMachineList = new VendingMachine *[numVendingMachines];
 		machineOfStudent = new unsigned int[numStudents];
-		for (int i = 0; i < numStudents; i++) {
+		for ( int i = 0; i < numStudents; i++ ) {
 			machineOfStudent[i] = i % numVendingMachines; 
 		}
 }
@@ -29,7 +29,7 @@ void NameServer::VMregister ( VendingMachine * vendingmachine ) {
 
 VendingMachine * NameServer::getMachine( unsigned int id ) {
 	int index = machineOfStudent[id];
-	prt.print( Printer::Kind::NameServer, 'N', id, index );
+	prt.print( Printer::NameServer, 'N', id, index );
 	machineOfStudent[id] = ( index + 1 ) % numVendingMachines;
 	return vendingMachineList[index];
 }
@@ -41,9 +41,9 @@ VendingMachine ** NameServer::getMachineList() {
 
 void NameServer::main() {
 	// print start
-	prt.print( Printer::Kind::NameServer, 'S' );
+	prt.print( Printer::NameServer, 'S' );
 
-	for (int i = 0; i < numVendingMachines; ){
+	for ( int i = 0; i < numVendingMachines; ){
 		_Accept( VMregister ) {
 			prt.print( Printer::Kind::NameServer, 'R', i ); // which one should be printed
 			i++;
@@ -51,7 +51,7 @@ void NameServer::main() {
 	} // for
 
 	for (;;) {
-		_Accept(~NameServer) {
+		_Accept( ~NameServer ) {
 			break;
 		} or _Accept( getMachine ) {
 
@@ -59,7 +59,5 @@ void NameServer::main() {
 
 		}
 	} // for
-
-	prt.print( Printer::Kind::NameServer, 'F' );
-
+	prt.print( Printer::NameServer, 'F' );
 }
