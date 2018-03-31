@@ -1,8 +1,6 @@
 # PRIVATE
 # PROJECT
 
-Classes:\
-
 Class | Progress  
 ---   | ---
 Bank             | xt  
