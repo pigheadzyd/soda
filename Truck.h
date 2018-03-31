@@ -1,7 +1,9 @@
 #ifndef __TRUCK_H__
 #define __TRUCK_H__
 
-class Printer, NameServer, BottlingPlant;
+class Printer;
+class NameServer;
+class BottlingPlant;
 
 _Task Truck {
   public:
@@ -12,8 +14,9 @@ _Task Truck {
   	NameServer & nameServer;
   	BottlingPlant & plant;
     int currentIndex = 0;
-    int empty = 0;
     int SODA_FLAVOUR = 4;
+    unsigned int total = 0;
+    unsigned int maxTotal;
     unsigned int currentIndex;
   	unsigned int numVendingMachines;
   	unsigned int maxStockPerFlavour;
