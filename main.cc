@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string.h>
+#include <unistd.h>         // getpid
 
 #include "config.h"
 #include "Bank.h"
@@ -19,7 +20,7 @@ int main(int argc, char const *argv[]){
 	// command line arguement handler
 	ConfigParms configParms;
 	string tempFile = "soda.config";
-	unsigned int seed = 1000;
+	unsigned int seed = = getpid();
 
 	try {
 		switch ( argc ){
@@ -32,6 +33,11 @@ int main(int argc, char const *argv[]){
 			cout << "Usage: " << argv[0] << " [ config-file [ random-seed (> 0) ] ]" << endl;
 			exit ( 1 );
 	}	// try
+
+	// debug only
+  cout << "seed for this run is " << seed << endl;
+  
+	mprng.set_seed( seed );
 
 	// read the input value
 	char configFile [tempFile.length() + 1]; 

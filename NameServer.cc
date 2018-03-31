@@ -29,7 +29,7 @@ void NameServer::VMregister ( VendingMachine * vendingmachine ) {
 
 VendingMachine * NameServer::getMachine( unsigned int id ) {
 	int index = machineOfStudent[id];
-	prt.print( Printer::NameServer, 'N', id, index );
+	prt.print( Printer::Kind::NameServer, 'N', id, index );
 	machineOfStudent[id] = ( index + 1 ) % numVendingMachines;
 	return vendingMachineList[index];
 }
@@ -41,7 +41,7 @@ VendingMachine ** NameServer::getMachineList() {
 
 void NameServer::main() {
 	// print start
-	prt.print( Printer::NameServer, 'S' );
+	prt.print( Printer::Kind::NameServer, 'S' );
 
 	for ( int i = 0; i < numVendingMachines; ){
 		_Accept( VMregister ) {
@@ -59,5 +59,5 @@ void NameServer::main() {
 
 		}
 	} // for
-	prt.print( Printer::NameServer, 'F' );
+	prt.print( Printer::Kind::NameServer, 'F' );
 }

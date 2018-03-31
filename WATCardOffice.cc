@@ -1,16 +1,105 @@
 #include "WATCardOffice.h"
+#include "MPRNG.h"
 #include "WATCard.h"
 
-WATCardOffice::WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers ){}
+using namespace std;
 
-WATCard::FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount ){
-	return null;
+/************************ WATCardOffice:Courier class ************************/
+WATCardOffice::Courier::Courier( Printer & prt, Bank & bank, WATCardOffice & office, unsigned int id ) :
+prt( prt ), bank( bank ), id( id ), office( office ) {
+
+}
+
+WATCardOffice::Courier::~Courier() {}
+
+void WATCardOffice::Courier::main() {
+	prt.print( Printer::Kind::Courier, id, 'S' );
+	for (;;) {
+		_Accept (~Courier) {
+			break;
+		} _Else {
+			WATCardOffice::Job * job = office.requestWork();				// here the job is always asking for money
+			if( job == NULL ) continue;
+			WATCard * card = job->card;
+			unsigned int studentId = job->studentId;
+			unsigned int amount = job->amount;
+			prt.print( Printer::Kind::Courier, id, 't', studentId, amount );
+			bank.withdraw( studentId, amount );											// should wait until fund is sufficient
+			card->deposit(amount);
+			if( mprng(5) == 0 ) {																		// card lost
+				// print message here?
+				job->result.exception( new WATCardOffice::Lost() );
+				prt.print( Printer::Kind::Courier, id, 'L', studentId );
+			} else {																								// card delivered
+				job->result.delivery( card );
+				prt.print( Printer::Kind::Courier, id, 'T', studentId, amount );
+			}
+			delete job;
+		}
+		
+	}
+	prt.print( Printer::Kind::Courier, id, 'F' );
+}
+
+/************************ WATCardOffice class ************************/
+WATCardOffice::WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers ) : 
+prt( prt ), bank( bank ) {
+  courierPool = new Courier[numCouriers]; 
+  for (unsigned int i = 0; i < numCouriers; i++){
+    courierPool[i] = new Courier( prt, bank, i );
+  }
+}
+
+WATCardOffice::~WATCardOffice() {
+	delete[] courierPool;
+	while( !jobs.empty ) {
+		Job * j = jobs.front();
+		jobs.pop();
+		delete j->card;
+		delete j;
+	}
+}
+
+/**  
+  * Create an new watcard for student and return the future
+  */
+WATCard::FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount ) {
+	WATCard newCard = new WATCard();
+	Job * newJob = new Job(sid, amount, newCard);
+	jobs.push(newJob);
+	prt.print( Printer::Kind::WATCardOffice, 'C', sid, amount );
+	return newJob->result;
 }
 
 WATCard::FWATCard WATCardOffice::transfer( unsigned int sid, unsigned int amount, WATCard * card ){
-	return null;
+	Job * newJob = new Job(sid, amount, card);
+	jobs.push(newJob);
+	prt.print( Printer::Kind::WATCardOffice, 'T', sid, amount );
+	return newJob->result;
 }
 
-WATCardOffice::Job WATCardOffice::requestWork(){
-	return null;
+WATCardOffice::Job * WATCardOffice::requestWork(){
+	if ( jobs.empty() ) return NULL;											// if null is returned that means everything is tearing down.
+	Job * j = jobs.front();
+	jobs.pop();
+
+	prt.print( Printer::Kind::WATCardOffice, 'W' );
+	return j;
+}
+
+void WATCardOffice::main() {
+	prt.print( Printer::Kind::WATCardOffice, 'S' );
+	for (;;) {
+		_Accept( ~WATCardOffice ) {
+
+			break;
+		} or _When( !jobs.empty() ) _Accept( requestWork ) {
+
+		} or _Accept( create ) {
+
+		} or _Accept( transfer ) {
+
+		}
+	}
+	prt.print( Printer::Kind::WATCardOffice, 'F' );
 }
