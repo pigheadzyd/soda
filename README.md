@@ -2,17 +2,17 @@
 # PROJECT
 
 Classes:\
-Bank              xt  \
-BottlingPlant     x   \
-Groupoff              \
-Nameserver        x   \
-Parent            xt  \
-Printer           x   \
-Student           o   \
-Truck             0   \
-VendingMachine    0   \
-WATCard           xv  \
-WARCardOffice     x   \
+|Bank             | xt | \
+|BottlingPlant    | x  | \
+|Groupoff         |    | \
+|Nameserver       | x  | \
+|Parent           | xt | \
+|Printer          | x  | \
+|Student          | o  | \
+|Truck            | 0  | \
+|VendingMachine   | 0  | \
+|WATCard          | xv | \
+|WARCardOffice    | x  | \
 
 
 Legends:\
