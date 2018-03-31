@@ -29,6 +29,7 @@ void WATCardOffice::Courier::main() {
 			if( mprng(5) == 0 ) {																		// card lost
 				// print message here?
 				job->result.exception( new WATCardOffice::Lost() );
+				delete card;
 				prt.print( Printer::Kind::Courier, id, 'L', studentId );
 			} else {																								// card delivered
 				job->result.delivery( card );
