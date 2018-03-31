@@ -3,17 +3,18 @@
 
 Classes:\
 
-
-Bank             | xt 
+Class | Progress  
+---   | ---
+Bank             | xt  
 BottlingPlant    | x  
 Groupoff         |    
 Nameserver       | x  
-Parent           | xt 
+Parent           | xt  
 Printer          | x  
 Student          | o  
 Truck            | 0  
 VendingMachine   | 0  
-WATCard          | xv 
+WATCard          | xv  
 WARCardOffice    | x  
 
 
