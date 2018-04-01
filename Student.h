@@ -23,6 +23,7 @@ _Task Student {
 
     unsigned int numOfPurchases;
     VendingMachine::Flavours favouriteFlavour;
+    unsigned int favouriteFlavourInt;
     VendingMachine * vendingMachine;
 
     WATCard::FWATCard watcard;

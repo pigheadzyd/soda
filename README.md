@@ -9,7 +9,7 @@ Groupoff         |
 Nameserver       | x  
 Parent           | xt  
 Printer          | x  
-Student          | o  
+Student          | x  
 Truck            | 0  
 VendingMachine   | 0  
 WATCard          | xv  
