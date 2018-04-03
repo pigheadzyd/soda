@@ -2,8 +2,8 @@
 #define __VENDINGMACHINE_H__
 #include <map>
 
-class Printer;
-class NameServer;
+_Monitor Printer;
+_Task NameServer;
 class WATCard;
 
 _Task VendingMachine {
@@ -23,11 +23,11 @@ _Task VendingMachine {
   private:
     Printer & prt;
     NameServer & nameServer;
-    int SODA_FLAVOUR = 4;
     unsigned int id;
     unsigned int soda;
     unsigned int sodaCost;
     unsigned int maxStockPerFlavour;
+    int SODA_FLAVOUR;
     unsigned int * curStock;
     std::map<Flavours, unsigned int> flavourMap;
     unsigned int getFlavourId( Flavours flavour );

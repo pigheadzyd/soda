@@ -19,10 +19,19 @@ Truck::Truck(
   unsigned int maxStockPerFlavour ): 
 	prt( prt ), nameServer( nameServer ), plant( plant ), 
 	numVendingMachines ( numVendingMachines ), 
-	maxStockPerFlavour ( maxStockPerFlavour ) {
+	maxStockPerFlavour ( maxStockPerFlavour ),
+	SODA_FLAVOUR( 4 ) {
+		product = new unsigned int[SODA_FLAVOUR];
+		emptyStatus = new bool[SODA_FLAVOUR];
+
 		for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
 			emptyStatus[i] = false;
-		}
+		}	// for
+}
+
+Truck::~Truck() {
+	delete[] product;
+	delete[] emptyStatus;
 }
 
 void Truck::main() {
@@ -38,7 +47,7 @@ void Truck::main() {
 		}	// try
 		prt.print( Printer::Truck, 'P', total );
 		VendingMachine ** vendingMachineList =  nameServer.getMachineList();
-		for ( int i = 0; i < numVendingMachines; ++i ) {			// for loop all the vending machines
+		for ( unsigned int i = 0; i < numVendingMachines; ++i ) {			// for loop all the vending machines
 			// get the vending machine and calculte the replenished request
 
 			prt.print( Printer::Truck, 'd', i, total );
@@ -61,14 +70,14 @@ void Truck::main() {
 					emptyStatus[i] = true;
 				}	// if
 			}	// for
-			vendingMachineList[curIndex]->restock();
-			prt.print( Printer::Truck, 'U', id, maxTotal );
+			vendingMachineList[curIndex]->restocked();
+			prt.print( Printer::Truck, 'U', vendingMachineList[curIndex]->getId(), maxTotal );
 			curIndex = ( curIndex + 1 ) % numVendingMachines;
 			// if a product in the truck is empty
 			if ( total == 0 ) {
 				// reset the value
 				for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
-					emptyStatus = false;
+					emptyStatus[i] = false;
 				}	// for
 				break;
 			}	// if

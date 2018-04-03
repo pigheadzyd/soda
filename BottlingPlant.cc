@@ -1,4 +1,4 @@
-#include <algorthim>
+#include <algorithm>
 
 #include "BottlingPlant.h"
 #include "Printer.h"
@@ -19,9 +19,13 @@ BottlingPlant::BottlingPlant(
 	maxShippedPerFlavour( maxShippedPerFlavour ),
 	maxStockPerFlavour( maxStockPerFlavour ),
 	timeBetweenShipments( timeBetweenShipments ),
-	shutdown( false ){}
+	shutdown( false ), SODA_FLAVOUR( 4 ) {
+		product = new unsigned int [SODA_FLAVOUR];
+	}
 
-BottlingPlant::~BottlingPlant() {}
+BottlingPlant::~BottlingPlant() {
+	delete[] product;
+}
 
 void BottlingPlant::main() {
 	prt.print( Printer::BottlingPlant, 'S' );
@@ -50,9 +54,9 @@ void BottlingPlant::main() {
 	_Accept ( getShipment );
 }
 
-void getShipment( unsigned int cargo[] ){
+void BottlingPlant::getShipment( unsigned int cargo[] ){
 	if ( shutdown ) {
-		_Throw shutdown();
+		_Throw Shutdown();
 	}	// if
 	std::copy( product, product + SODA_FLAVOUR, cargo );
 }

@@ -3,8 +3,8 @@
 #include <queue>
 #include "WATCard.h"
 
-class Printer;
-class Bank;
+_Monitor Printer;
+_Monitor Bank;
 
 _Task WATCardOffice {
 	struct Job {                              // marshalled arguments and return future
@@ -29,7 +29,7 @@ _Task WATCardOffice {
 
 	Printer & prt;
 	Bank & bank;
-	Courier * courierPool;
+	Courier ** courierPool;
 	std::queue<Job *> jobs;
 	void main();
 public:

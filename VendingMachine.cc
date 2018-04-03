@@ -12,7 +12,8 @@ VendingMachine::VendingMachine(
 	unsigned int maxStockPerFlavour ):
 	prt( prt ), nameServer( nameServer ),
 	id ( id ), sodaCost( sodaCost ), 
-	maxStockPerFlavour( maxStockPerFlavour ) {
+	maxStockPerFlavour( maxStockPerFlavour ),
+	SODA_FLAVOUR( 4 ) {
 		curStock = new unsigned int[SODA_FLAVOUR];
 		for ( int i = 0; i < SODA_FLAVOUR; ++i ) {	// init the value
 			curStock[i] = 0;
@@ -29,20 +30,17 @@ VendingMachine::~VendingMachine() {
 	delete[] curStock;
 }
 
-unsigned int VendingMachine::getFlavourID( Flavours flavour ) {
+unsigned int VendingMachine::getFlavourId( Flavours flavour ) {
 	return flavourMap.at( flavour );
 }
 
 void VendingMachine::buy( Flavours flavour, WATCard & card ) {
-	if ( !buyFlag ) {
-		restockLock.wait();
-	}	// if
 	// check enough balance
 	if ( card.getBalance() < sodaCost ) {
-		_Throw Fund();
+		_Throw Funds();
 	}	// if
 	// check enough flavour
-	int flavourIndex = getFlavourID( flavour );
+	int flavourIndex = getFlavourId( flavour );
 	if ( curStock[flavourIndex] == 0 ) {
 		_Throw Stock();
 	}	// if 

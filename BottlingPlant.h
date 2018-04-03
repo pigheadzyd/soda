@@ -1,7 +1,8 @@
 #ifndef __BOTTLINGPLANT_H__
 #define __BOTTLINGPLANT_H__
 
-class Printer, NameServer;
+_Monitor Printer;
+_Task NameServer;
 
 _Task BottlingPlant {
   public:
@@ -14,13 +15,13 @@ _Task BottlingPlant {
   private:
   	Printer & prt;
   	NameServer & nameServer;
-    int SODA_FLAVOUR = 4;
   	unsigned int numVendingMachines;
   	unsigned int maxShippedPerFlavour;
   	unsigned int maxStockPerFlavour;
   	unsigned int timeBetweenShipments;
-    unsigned int product[SODA_FLAVOUR];
   	bool shutdown;
+    int SODA_FLAVOUR;
+    unsigned int * product;
     void main();
 };
 

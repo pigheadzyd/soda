@@ -3,14 +3,15 @@
 #include "WATCard.h"
 #include <list>
 
-class Printer;
+_Monitor Printer;
+
 _Task Groupoff {
 	public:
 		Groupoff( Printer & prt, unsigned int numStudents, unsigned int sodaCost, unsigned int groupoffDelay );
     ~Groupoff();
 		WATCard::FWATCard giftCard();
 	private:
-		Printer prt;
+		Printer & prt;
 		unsigned int numStudents;
 		unsigned int sodaCost;
 		unsigned int groupoffDelay;

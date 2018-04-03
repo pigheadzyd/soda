@@ -1,8 +1,8 @@
 #ifndef __PARENT_H__
 #define __PARENT_H__
 
-class Printer; 
-class Bank;
+_Monitor Printer; 
+_Monitor Bank;
 
 _Task Parent {
   public:

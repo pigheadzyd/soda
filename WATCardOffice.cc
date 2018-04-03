@@ -47,15 +47,15 @@ void WATCardOffice::Courier::main() {
 /************************ WATCardOffice class ************************/
 WATCardOffice::WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers ) : 
 prt( prt ), bank( bank ) {
-  courierPool = new Courier[numCouriers]; 
-  for (unsigned int i = 0; i < numCouriers; i++){
-    courierPool[i] = new Courier( prt, bank, i );
+  courierPool = new Courier*[numCouriers]; 
+  for ( unsigned int i = 0; i < numCouriers; i++ ){
+    courierPool[i] = new Courier( prt, bank, *this, i );
   }
 }
 
 WATCardOffice::~WATCardOffice() {
 	delete[] courierPool;
-	while( !jobs.empty ) {
+	while( !jobs.empty() ) {
 		Job * j = jobs.front();
 		jobs.pop();
 		delete j->card;
@@ -67,7 +67,7 @@ WATCardOffice::~WATCardOffice() {
   * Create an new watcard for student and return the future
   */
 WATCard::FWATCard WATCardOffice::create( unsigned int sid, unsigned int amount ) {
-	WATCard newCard = new WATCard();
+	WATCard * newCard = new WATCard();
 	Job * newJob = new Job(sid, amount, newCard);
 	jobs.push(newJob);
 	prt.print( Printer::Kind::WATCardOffice, 'C', sid, amount );
