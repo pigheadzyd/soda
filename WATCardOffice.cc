@@ -1,12 +1,14 @@
 #include "WATCardOffice.h"
 #include "MPRNG.h"
+#include "Printer.h"
+#include "Bank.h"
 #include "WATCard.h"
 
 using namespace std;
 
 /************************ WATCardOffice:Courier class ************************/
 WATCardOffice::Courier::Courier( Printer & prt, Bank & bank, WATCardOffice & office, unsigned int id ) :
-prt( prt ), bank( bank ), id( id ), office( office ) {
+prt( prt ), bank( bank ), office( office ), id( id ) {
 
 }
 

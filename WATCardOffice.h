@@ -1,6 +1,10 @@
 #ifndef __WATCARDOFFICE_H__
 #define __WATCARDOFFICE_H__
 #include <queue>
+#include "WATCard.h"
+
+class Printer;
+class Bank;
 
 _Task WATCardOffice {
 	struct Job {                              // marshalled arguments and return future
@@ -11,6 +15,7 @@ _Task WATCardOffice {
 		Job( unsigned int studentId, unsigned int amount, WATCard * card ) 
 		: studentId( studentId ), amount( amount ), card( card ) {}
 	};
+
 	_Task Courier { 
 		Printer & prt;
 		Bank & bank;
@@ -25,9 +30,7 @@ _Task WATCardOffice {
 	Printer & prt;
 	Bank & bank;
 	Courier * courierPool;
-
 	std::queue<Job *> jobs;
-
 	void main();
 public:
 	_Event Lost {};                           // lost WATCard

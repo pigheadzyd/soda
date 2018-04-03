@@ -1,6 +1,7 @@
 #ifndef __VENDINGMACHINE_H__
 #define __VENDINGMACHINE_H__
 #include <map>
+
 class Printer;
 class NameServer;
 class WATCard;
