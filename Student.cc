@@ -34,12 +34,14 @@ void  Student::main() {
   for(unsigned int i = 0; i < maxPurchases; ) {
     _Select( groupOffCard ) {
       try {
-        curCard = groupOffCard();                         // this card should be deleted in gift card class?
+        curCard = groupOffCard();                         // this card is deleted here
         yield(mprng(1,10));
         vendingMachine.buy( favouriteFlavour, *curCard );
         groupOffCard.reset();
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
+        delete curCard;
+        curCard = NULL;
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
         yield(4);
@@ -71,10 +73,11 @@ void  Student::main() {
 
       } catch ( VendingMachine::Funds fundEvent ) {       // transfer
         watcard = cardOffice.transfer( id, 5 + vendingMachine->cost(), curCard );
-        
+
       } // try
     } // select
 
   } // for
+  if ( curCard != NULL ) delete curCard;
   prt.print( Printer::Kind::Student, id, 'F');
 } // main
