@@ -34,7 +34,7 @@ void Groupoff::main() {
 			gc->deposit( sodaCost );
 			yield( groupoffDelay );
 			giftcards[next]->delivery( gc );
-			giftcards.remove( giftcards[next] );
+			giftcards.erase (giftcards.begin() + next );
 			remainingStudents -= 1;
 			if ( remainingStudents == 0 ) break;				// all gift card is send out
 		}
@@ -44,6 +44,6 @@ void Groupoff::main() {
 
 WATCard::FWATCard Groupoff::giftCard(){
 	WATCard::FWATCard futureCard;
-	giftcards.pushback( futureCard );
+	giftcards.push_back( futureCard );
 	return futureCard;
 };

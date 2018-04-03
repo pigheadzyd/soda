@@ -1,7 +1,7 @@
 #ifndef __GROUPOFF_H__
 #define __GROUPOFF_H__
 #include "WATCard.h"
-#include <list>
+#include <vector>
 
 _Monitor Printer;
 
@@ -15,7 +15,7 @@ _Task Groupoff {
 		unsigned int numStudents;
 		unsigned int sodaCost;
 		unsigned int groupoffDelay;
-    std::list<WATCard::FWATCard> giftcards;
+    std::vector<char> v;<WATCard::FWATCard> giftcards;
     void main();
 };
 
