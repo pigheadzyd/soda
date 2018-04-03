@@ -21,6 +21,7 @@ VendingMachine::VendingMachine(
 		flavourMap[lasmoi1] = 1;
 		flavourMap[lasmoi2] = 2;
 		flavourMap[lasmoi3] = 3;
+		nameServer.VMregister( this );
 }
 
 VendingMachine::~VendingMachine() {
