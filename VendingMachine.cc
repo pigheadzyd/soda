@@ -24,7 +24,7 @@ VendingMachine::VendingMachine(
 }
 
 VendingMachine::~VendingMachine() {
-
+	prt.print( Printer::Vending, 'F' );
 	delete[] curStock;
 }
 
@@ -45,36 +45,37 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 	if ( curStock[flavourIndex] == 0 ) {
 		_Throw Stock();
 	}	// if 
-
 	unsigned int free = mprng( 4 );
-	if ( !free ) {
-		buyLock.signal();
-		mainLock.wait();
+	if ( free ) {
+		_Throw Free();
 	}	// if
-
+	card.withdraw( sodaCost );
+	curStock[flavourIndex]--;
+	prt.print( Printer::Vending, 'B', flavourIndex, curStock[flavourIndex] );
 }
 
 void VendingMachine::main() {
+	prt.print( Printer::Vending, 'S', sodaCost );
 	for ( ;; ) {
 		_Accept( ~VendingMachine ) {
 			break;
-		}_Else {
+		} or _Accept( buy ) {
 
+		} or _Accept( inventory ) {
+			prt.print( Printer::Vending, 'r' );
+			_Accept ( restocked ) {
+				prt.print( Printer::Vending, 'R' );
+			}
 		}
 	}
 }
 
 unsigned int * VendingMachine::inventory(){
-	buyFlag = false;
 	return curStock;
 }          
 
 void VendingMachine::restocked() {
 	// wake up the 
-	while ( !buyLock.empty() ) {
-		buyLock.signal();
-	}	// while
-	buyFlag = true;
 }
 
 _Nomutex unsigned int VendingMachine::cost(){

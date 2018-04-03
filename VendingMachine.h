@@ -28,10 +28,6 @@ _Task VendingMachine {
     unsigned int sodaCost;
     unsigned int maxStockPerFlavour;
     unsigned int * curStock;
-    bool buyFlag = true;
-    uCondition buyLock;
-    uCondition mainLock;
-    uCondition restockLock;
     std::map<Flavours, unsigned int> flavourMap;
     unsigned int getFlavourId( Flavours flavour );
     void main();
