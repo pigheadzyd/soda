@@ -27,7 +27,7 @@ Student::Student(
 
 void  Student::main() {
   prt.print( Printer::Kind::Student, id, 'S', favouriteFlavourInt, numOfPurchases );
-  watcard = WATCardOffice.create( id, 5 );
+  watcard = cardOffice.create( id, 5 );
   groupOffCard = groupoff.giftCard();
   vendingMachine = nameServer.getMachine( id );
 
@@ -36,7 +36,7 @@ void  Student::main() {
       try {
         curCard = groupOffCard();                         // this card is deleted here
         yield(mprng(1,10));
-        vendingMachine.buy( favouriteFlavour, *curCard );
+        vendingMachine->buy( favouriteFlavour, *curCard );
         groupOffCard.reset();
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
@@ -54,8 +54,8 @@ void  Student::main() {
     } or _Select( watcard ) {
       try {
         curCard = watcard();                              // this card should be deleted in gift card class?
-        yield(mprng(1,10));
-        vendingMachine.buy( favouriteFlavour, *curCard );
+        yield( mprng(1, 10 ) );
+        vendingMachine->buy( favouriteFlavour, *curCard );
         prt.print( Printer::Kind::Student, id, 'B', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
 

@@ -14,9 +14,9 @@ _Task Student {
              unsigned int id, unsigned int maxPurchases );
 	private:
 		Printer & prt;
-		NameServer nameServer;
-		WATCardOffice cardOffice;
-		Groupoff groupoff;
+		NameServer & nameServer;
+		WATCardOffice & cardOffice;
+		Groupoff & groupoff;
 		unsigned int id;
 		unsigned int maxPurchases;
     void main();

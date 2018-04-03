@@ -31,7 +31,7 @@ void Groupoff::main() {
 			assert( remainingStudents == giftcards.size() );
 			int next = mprng( remainingStudents - 1 );			// get the next giftcard to be sent
 			WATCard * gc = new WATCard();
-			gc.deposit( sodaCost );
+			gc->deposit( sodaCost );
 			yield( groupoffDelay );
 			giftcards[next]->delivery( gc );
 			giftcards.remove( giftcards[next] );
