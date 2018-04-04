@@ -41,7 +41,7 @@ void  Student::main() {
         yield(mprng(1,10));
         vendingMachine->buy( favouriteFlavour, *curGiftCard );
         prt.print( Printer::Kind::Student, id, '3');
-        prt.print( Printer::Kind::Student, id, '4');
+        prt.print( Printer::Kind::Student, id, '5');
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
         groupOffCard.reset();
