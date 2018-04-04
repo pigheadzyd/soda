@@ -4,7 +4,7 @@ CXX = u++					# compiler
 CXXFLAGS = -g -multi -O2 -std=c++11 -Wall -Wextra -MMD -D${OUTPUT} # compiler flags
 MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
 
-OBJECTS1 = WATCard.o WATCardOffice.o NameServer.o Truck.o VendingMachine.o BottlingPlant.o config.o Parent.o Printer.o Bank.o Student.o Groupoff.o main.o # test1.o test2.o 
+OBJECTS1 = WATCard.o WATCardOffice.o NameServer.o Truck.o VendingMachine.o BottlingPlant.o config.o Parent.o Printer.o Bank.o Student.o Groupoff.o main.o
 
 EXEC1 = soda
 

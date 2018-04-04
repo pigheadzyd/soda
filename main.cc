@@ -1,3 +1,8 @@
+//--------------------------------------------------------------------------------------------------------------------
+// Creates the tasks and starts vending machine system. The system allow student to buy soda from vending machine 
+// using either giftcard or WatCard. Parent will send money to student periodically. And vending machine will be
+// restocked by truck periodically.
+//--------------------------------------------------------------------------------------------------------------------
 #include <iostream>
 #include <string.h>
 #include <unistd.h>         // getpid
@@ -17,9 +22,6 @@
 #include "MPRNG.h"
 
 using namespace std;
-
-MPRNG mprng;
-
 
 int main(int argc, char const *argv[]){
 	
@@ -50,6 +52,7 @@ int main(int argc, char const *argv[]){
 	std::strcpy( configFile, tempFile.c_str() );
 	processConfigFile( configFile, configParms );
 
+	// Init serverl unique member
 	Printer printer( configParms.numStudents, configParms.numVendingMachines, configParms.numCouriers );
 	Bank bank ( configParms.numStudents );
 	Parent parent( printer, bank, configParms.numStudents, configParms.parentalDelay );
@@ -57,27 +60,34 @@ int main(int argc, char const *argv[]){
 	WATCardOffice office( printer, bank, configParms.numCouriers );
 	NameServer nameServer( printer, configParms.numVendingMachines, configParms.numStudents );
 
+	// Init vending machine
 	VendingMachine * vendingMachineList[configParms.numVendingMachines];
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		vendingMachineList[i] = new VendingMachine( printer, nameServer, i, configParms.sodaCost, configParms.maxStockPerFlavour );
 	} // for
 
+	// Init bottling plant
 	BottlingPlant * bottlingPlant = new BottlingPlant( printer, nameServer, configParms.numVendingMachines, 
 		configParms.maxShippedPerFlavour, configParms.maxStockPerFlavour, configParms.timeBetweenShipments );
 
+	// Init student
 	Student * studentList[configParms.numStudents];
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
 	} // for
 	
+	// When student finish buying delete them
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		delete studentList[i];
 	} // for	
 
+	// Delete bottling plant
 	delete bottlingPlant;
 
+	// Delete vending machine
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];
 	} // for
+
 	return 0;
 }
