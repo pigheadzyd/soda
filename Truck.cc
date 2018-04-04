@@ -9,8 +9,6 @@
 #include "BottlingPlant.h"
 #include "VendingMachine.h"
 
-extern MPRNG mprng;
-
 Truck::Truck( 
 	Printer & prt, 
 	NameServer & nameServer, 
@@ -30,6 +28,7 @@ Truck::Truck(
 }
 
 Truck::~Truck() {
+
 	delete[] product;
 	delete[] emptyStatus;
 }

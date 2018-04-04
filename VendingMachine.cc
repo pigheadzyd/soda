@@ -26,7 +26,7 @@ VendingMachine::VendingMachine(
 }
 
 VendingMachine::~VendingMachine() {
-	prt.print( Printer::Vending, 'F' );
+	prt.print( Printer::Vending, id, 'F' );
 	delete[] curStock;
 }
 
@@ -50,11 +50,11 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 	}	// if
 	card.withdraw( sodaCost );
 	curStock[flavourIndex]--;
-	prt.print( Printer::Vending, 'B', flavourIndex, curStock[flavourIndex] );
+	prt.print( Printer::Vending, id, 'B', flavourIndex, curStock[flavourIndex] );
 }
 
 void VendingMachine::main() {
-	prt.print( Printer::Vending, 'S', sodaCost );
+	prt.print( Printer::Vending, id, 'S', sodaCost );
 	for ( ;; ) {
 		try {
 			_Accept( ~VendingMachine ) {
@@ -63,10 +63,10 @@ void VendingMachine::main() {
 
 			} or _Accept( inventory ) {
 
-				prt.print( Printer::Vending, 'r' );
+				prt.print( Printer::Vending, id, 'r' );
 
 				_Accept ( restocked ) {
-					prt.print( Printer::Vending, 'R' );
+					prt.print( Printer::Vending, id, 'R' );
 				}	// _Accept
 			}	// _Accept
 		} catch ( uMutexFailure::RendezvousFailure ) {
