@@ -54,7 +54,10 @@ prt( prt ), bank( bank ) {
 }
 
 WATCardOffice::~WATCardOffice() {
-	delete[] courierPool;
+	for ( unsigned int i = 0; i < numCouriers; i++ ) {
+    delete courierPool[i];
+  }
+	delete courierPool;
 	while( !jobs.empty() ) {
 		Job * j = jobs.front();
 		jobs.pop();
