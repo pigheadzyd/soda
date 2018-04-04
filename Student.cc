@@ -40,26 +40,26 @@ void  Student::main() {
     _Select( groupOffCard ) {
       try {
         prt.print( Printer::Kind::Student, id, '1');
-        curGiftCard = groupOffCard();                         // all gift cards are deleted by group off at last
+        curCard = groupOffCard();                         // all gift cards are deleted by group off at last
         prt.print( Printer::Kind::Student, id, '2');
         yield(mprng(1,10));
-        vendingMachine->buy( favouriteFlavour, *curGiftCard );
+        vendingMachine->buy( favouriteFlavour, *curCard );
         prt.print( Printer::Kind::Student, id, '3');
         prt.print( Printer::Kind::Student, id, '5');
-        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
         prt.print( Printer::Kind::Student, id, 'g');
-        // groupOffCard.reset();
+        groupOffCard.reset();
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, '4');
-        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
         yield(4);
         i += 1;                                           // +1 because one consumed
       } catch ( VendingMachine::Stock stockEvent ) {
         vendingMachine = nameServer.getMachine( id );     // get the new machine
         prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
       }
-      if ( curGiftCard->getBalance() == 0 ) groupOffCard.reset();
+      // if ( curGiftCard->getBalance() == 0 ) groupOffCard.reset();
     } or _Select( watcard ) {
       try {
         curCard = watcard();                              // this card should be deleted in gift card class?
