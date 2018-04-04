@@ -1,0 +1,8 @@
+Testing format:
+All lines starting with '>' are command line arguments, and lines
+indented with 4 spaces are command line outputs. '...' means some lines
+of outputs are omitted.
+
+Argument Tests:
+
+
