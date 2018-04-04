@@ -45,6 +45,7 @@ void  Student::main() {
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
         groupOffCard.reset();
+        prt.print( Printer::Kind::Student, id, 'g');
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, '4');
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
@@ -90,7 +91,6 @@ void  Student::main() {
     }
   }
   if ( curCard != NULL ) {
-    prt.print( Printer::Kind::Student, id, 'g');
     delete curCard;
     prt.print( Printer::Kind::Student, id, 'f');
   }
