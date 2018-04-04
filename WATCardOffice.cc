@@ -73,6 +73,7 @@ WATCardOffice::~WATCardOffice() {
 		prt.print( Printer::Kind::WATCardOffice, 'C' );
     delete courierPool[i];
   }
+  prt.print( Printer::Kind::WATCardOffice, 'D' );
 	delete courierPool;
 	prt.print( Printer::Kind::WATCardOffice, 'F' );
 }
