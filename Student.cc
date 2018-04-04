@@ -40,7 +40,7 @@ void  Student::main() {
         groupOffCard.reset();
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
-        delete curCard;
+        // delete curCard;
         curCard = NULL;
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );

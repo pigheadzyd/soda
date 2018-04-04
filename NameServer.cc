@@ -46,7 +46,6 @@ void NameServer::main() {
 
 	for ( unsigned int i = 0; i < numVendingMachines; ){
 		_Accept( VMregister ) {
-			// prt.print( Printer::Kind::NameServer, 'R', i ); // which one should be printed
 			i++;
 		}
 	} // for

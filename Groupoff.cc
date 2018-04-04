@@ -16,7 +16,11 @@ Groupoff::Groupoff(
 	groupoffDelay( groupoffDelay ) {
 }
 
-Groupoff::~Groupoff() {}
+Groupoff::~Groupoff() {
+	for( unsigned int i = 0; i < cardList.size() ; i++ ){
+		delete cardList[i];
+	}
+}
 
 void Groupoff::main() {
 	prt.print( Printer::Groupoff, 'S' );
@@ -31,6 +35,7 @@ void Groupoff::main() {
 			assert( remainingStudents == giftcards.size() );
 			int next = mprng( remainingStudents - 1 );			// get the next giftcard to be sent
 			WATCard * gc = new WATCard();
+			cardList.push_back( gc );
 			gc->deposit( sodaCost );
 			yield( groupoffDelay );
 			giftcards[next].delivery( gc );
