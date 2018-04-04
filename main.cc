@@ -23,6 +23,8 @@
 
 using namespace std;
 
+MPRNG mprng;
+
 int main(int argc, char const *argv[]){
 	
 	// command line arguement handler
