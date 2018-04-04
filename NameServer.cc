@@ -25,6 +25,7 @@ NameServer::~NameServer() {
 
 void NameServer::VMregister ( VendingMachine * vendingmachine ) {
 	vendingMachineList[vendingmachine->getId()] = vendingmachine;
+	prt.print( Printer::Kind::NameServer, 'r', vendingmachine->getId() );
 }
 
 VendingMachine * NameServer::getMachine( unsigned int id ) {
