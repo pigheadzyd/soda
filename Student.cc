@@ -30,7 +30,7 @@ void  Student::main() {
   watcard = cardOffice.create( id, 5 );
   groupOffCard = groupoff.giftCard();
   vendingMachine = nameServer.getMachine( id );
-
+  prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
   for(unsigned int i = 0; i < maxPurchases; ) {
     _Select( groupOffCard ) {
       try {
