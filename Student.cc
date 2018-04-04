@@ -90,8 +90,11 @@ void  Student::main() {
   } // for
   if ( watcard.available() ) { 
     try {                           // handle the case that Gifcard purchases the last bottle
+      prt.print( Printer::Kind::Student, id, 'G');
       curCard = watcard();
+      prt.print( Printer::Kind::Student, id, 'g');
     } catch ( WATCardOffice::Lost lostEvent ) {
+      prt.print( Printer::Kind::Student, id, 'l');
       curCard = NULL;
     }
   }
