@@ -64,10 +64,10 @@ int main(int argc, char const *argv[]){
 		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
 	} // for
 
-	// VendingMachine * vendingMachineList[configParms.numVendingMachines];
-	// for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
-	// 	vendingMachineList[i] = new VendingMachine( printer, nameServer, i, configParms.sodaCost, configParms.maxStockPerFlavour );
-	// } // for
+	VendingMachine * vendingMachineList[configParms.numVendingMachines];
+	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
+		vendingMachineList[i] = new VendingMachine( printer, nameServer, i, configParms.sodaCost, configParms.maxStockPerFlavour );
+	} // for
 
 
 	
@@ -75,12 +75,11 @@ int main(int argc, char const *argv[]){
 		delete studentList[i];
 	} // for	
 
-	cout << "bottlingPlant deleting" << endl;
 	delete bottlingPlant;
-cout << "bottlingPlant deleted" << endl;
-	// for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
-	// 	delete vendingMachineList[i];
-	// } // for		
 
+	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
+		delete vendingMachineList[i];
+	} // for		
+cout << "returning deleting" << endl;
 	return 0;
 }
