@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]){
 
 	try {
 		switch ( argc ){
-			case 3: seed = stoi ( argv[2] ); if ( seed < 1 ) throw 1; 
+			case 3: seed = stoi ( argv[2] ); if ( stoi ( argv[2] ) < 1 ) throw 1; 
 			case 2: tempFile = argv[1];
 			case 1: break;
 			default: throw 1;

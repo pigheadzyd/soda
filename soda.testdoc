@@ -5,4 +5,9 @@ of outputs are omitted.
 
 Argument Tests:
 
+Test with file not exist:
+  > ./soda fileNotExist
+    Error: could not open input file "fileNotExist"
 
+Test with negative seed:
+  > ./soda 
