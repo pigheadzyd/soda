@@ -36,23 +36,16 @@ void  Student::main() {
   vendingMachine = nameServer.getMachine( id );
   prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
   for(unsigned int i = 0; i < numOfPurchases; ) {
-    prt.print( Printer::Kind::Student, id, '?');
     _Select( groupOffCard ) {
       try {
-        prt.print( Printer::Kind::Student, id, '1');
         curCard = groupOffCard();                         // all gift cards are deleted by group off at last
-        prt.print( Printer::Kind::Student, id, '2');
         yield(mprng(1,10));
         vendingMachine->buy( favouriteFlavour, *curCard );
-        prt.print( Printer::Kind::Student, id, '3');
-        prt.print( Printer::Kind::Student, id, '5');
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
-        prt.print( Printer::Kind::Student, id, 'g');
         groupOffCard.reset();
         curCard = NULL;
       } catch ( VendingMachine::Free freeEvent ) {
-        prt.print( Printer::Kind::Student, id, '4');
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
         yield(4);
         i += 1;                                           // +1 because one consumed
@@ -89,17 +82,9 @@ void  Student::main() {
 
   } // for
   try {                           // handle the case that Gifcard purchases the last bottle
-    prt.print( Printer::Kind::Student, id, 'G');
     curCard = watcard();
-    prt.print( Printer::Kind::Student, id, 'g');
-  } catch ( WATCardOffice::Lost lostEvent ) {
-    prt.print( Printer::Kind::Student, id, 'l');
-    curCard = NULL;
-  }
-  if ( curCard != NULL ) {
     delete curCard;
-    prt.print( Printer::Kind::Student, id, 'f');
+  } catch ( WATCardOffice::Lost lostEvent ) {
   }
-  curCard = NULL;
   prt.print( Printer::Kind::Student, id, 'F');
 } // main
