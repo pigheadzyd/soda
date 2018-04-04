@@ -33,5 +33,4 @@ void Parent::main() {
 			prt.print( Printer::Parent, 'D', id, amount );
 		}	// _Accept
 	}	// for
-	prt.print( Printer::Parent, 'F', 0 );
 }	// void Parent::main

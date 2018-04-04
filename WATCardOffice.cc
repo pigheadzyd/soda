@@ -21,7 +21,7 @@ void WATCardOffice::Courier::main() {
 			break;
 		} _Else {
 			WATCardOffice::Job * job = office.requestWork();				// here the job is always asking for money
-			if( job == NULL ) break;
+			if( job == NULL ) continue;															// if job is null, that means office is closed
 			WATCard * card = job->card;
 			unsigned int studentId = job->studentId;
 			unsigned int amount = job->amount;
@@ -55,7 +55,8 @@ prt( prt ), bank( bank ), numCouriers( numCouriers ) {
 
 WATCardOffice::~WATCardOffice() {
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
-		prt.print( Printer::Kind::WATCardOffice, 'D', i );
+		_Accept( requestWork ) {
+		} _Else {}
     delete courierPool[i];
   }
 	delete courierPool;
@@ -97,21 +98,15 @@ WATCardOffice::Job * WATCardOffice::requestWork(){
 void WATCardOffice::main() {
 	prt.print( Printer::Kind::WATCardOffice, 'S' );
 	for (;;) {
-		prt.print( Printer::Kind::WATCardOffice, '0' );
 		_Accept( ~WATCardOffice ) {
-			prt.print( Printer::Kind::WATCardOffice, '1' );
-			_Accept( requestWork ) {
-				prt.print( Printer::Kind::WATCardOffice, '8' );
-			} _Else {
-				prt.print( Printer::Kind::WATCardOffice, '9' );
-			}
+
 			break;
 		} or _When( !jobs.empty() ) _Accept( requestWork ) {
-			prt.print( Printer::Kind::WATCardOffice, '2' );
+
 		} or _Accept( create ) {
-			prt.print( Printer::Kind::WATCardOffice, '3' );
+
 		} or _Accept( transfer ) {
-			prt.print( Printer::Kind::WATCardOffice, '4' );
+
 		}
 	}
 	prt.print( Printer::Kind::WATCardOffice, 'F' );
