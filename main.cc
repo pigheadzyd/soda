@@ -80,6 +80,6 @@ int main(int argc, char const *argv[]){
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];
 	} // for		
-cout << "returning deleting" << endl;
+// cout << "returning deleting" << endl;
 	return 0;
 }
