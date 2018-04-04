@@ -29,6 +29,7 @@ BottlingPlant::BottlingPlant(
 	}
 
 BottlingPlant::~BottlingPlant() {
+	_Accept ( getShipment );
 	delete truck;
 	delete[] product;
 }
@@ -56,7 +57,6 @@ void BottlingPlant::main() {
 			// }	// reset the value
 		}	// _Accept
 	}	// for
-	_Accept ( getShipment );
 }
 
 void BottlingPlant::getShipment( unsigned int cargo[] ){
