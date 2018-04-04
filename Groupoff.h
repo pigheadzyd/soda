@@ -15,7 +15,7 @@ _Task Groupoff {
 		unsigned int numStudents;
 		unsigned int sodaCost;
 		unsigned int groupoffDelay;
-    std::vector<char> v;<WATCard::FWATCard> giftcards;
+    std::vector<WATCard::FWATCard> giftcards;
     void main();
 };
 

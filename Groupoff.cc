@@ -33,7 +33,7 @@ void Groupoff::main() {
 			WATCard * gc = new WATCard();
 			gc->deposit( sodaCost );
 			yield( groupoffDelay );
-			giftcards[next]->delivery( gc );
+			giftcards[next].delivery( gc );
 			giftcards.erase (giftcards.begin() + next );
 			remainingStudents -= 1;
 			if ( remainingStudents == 0 ) break;				// all gift card is send out
