@@ -5,6 +5,9 @@
 #include "Groupoff.h"
 #include "VendingMachine.h"
 #include "MPRNG.h"
+#include <iostream>
+
+using namespace std;
 
 // extern MPRNG mprng;
 
@@ -26,6 +29,7 @@ Student::Student(
 }
 
 void  Student::main() {
+  cout << id << ": " << this << endl;
   prt.print( Printer::Kind::Student, id, 'S', favouriteFlavourInt, numOfPurchases );
   watcard = cardOffice.create( id, 5 );
   groupOffCard = groupoff.giftCard();
