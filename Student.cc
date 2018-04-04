@@ -48,7 +48,7 @@ void  Student::main() {
           }
         }
       } catch ( VendingMachine::Free freeEvent ) {
-        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
         yield(4);
         i += 1;                                           // +1 because one consumed
       } catch ( VendingMachine::Stock stockEvent ) {
