@@ -44,8 +44,8 @@ void  Student::main() {
         prt.print( Printer::Kind::Student, id, '5');
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
-        groupOffCard.reset();
         prt.print( Printer::Kind::Student, id, 'g');
+        groupOffCard.reset();
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, '4');
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
