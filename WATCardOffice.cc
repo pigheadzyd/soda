@@ -59,7 +59,10 @@ WATCardOffice::~WATCardOffice() {
 	while( !jobs.empty() ) {
 		Job * j = jobs.front();
 		jobs.pop();
-		if ( j->card != NULL ) delete j->card;
+		if ( j->card != NULL ) {
+			delete j->card;
+			prt.print( Printer::Kind::WATCardOffice, 'J' );
+		}
 		delete j;
 	}
 	prt.print( Printer::Kind::WATCardOffice, 'B' );

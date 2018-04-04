@@ -29,6 +29,7 @@ _Task Student {
     WATCard::FWATCard watcard;
     WATCard::FWATCard groupOffCard;
     WATCard * curCard;
+    WATCard * curGiftCard;
 
 };
 

@@ -34,13 +34,12 @@ void  Student::main() {
   for(unsigned int i = 0; i < numOfPurchases; ) {
     _Select( groupOffCard ) {
       try {
-        curCard = groupOffCard();                         // all gift cards are deleted by group off at last
+        curGiftCard = groupOffCard();                         // all gift cards are deleted by group off at last
         yield(mprng(1,10));
-        vendingMachine->buy( favouriteFlavour, *curCard );
+        vendingMachine->buy( favouriteFlavour, *curGiftCard );
         groupOffCard.reset();
-        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
-        curCard = NULL;
         if ( watcard.available() ) { 
           try {                           // handle the case that Gifcard purchases the last bottle
             curCard = watcard();
