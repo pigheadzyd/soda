@@ -1,6 +1,6 @@
 #include <algorithm>														// Defines std::copy
 
-#include "BottlingPlant.h"											// Definition of Bank monitor
+#include "BottlingPlant.h"											// Definition of Bottling Plant Task
 #include "Printer.h"
 #include "NameServer.h"
 #include "Truck.h"
