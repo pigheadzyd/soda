@@ -41,8 +41,12 @@ void  Student::main() {
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
         // delete curCard;
-        if ( watcard.available() ) {                            // handle the case that Gifcard purchases the last bottle
-          curCard = watcard();
+        if ( watcard.available() ) { 
+          try {                           // handle the case that Gifcard purchases the last bottle
+            curCard = watcard();
+          } catch ( WATCardOffice::Lost lostEvent ) {
+            curCard = NULL;
+          }
         }
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
