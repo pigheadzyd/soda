@@ -52,7 +52,7 @@ int main(int argc, char const *argv[]){
 
 	Printer printer( configParms.numStudents, configParms.numVendingMachines, configParms.numCouriers );
 	Bank bank ( configParms.numStudents );
-	Parent parent( printer, bank, configParms.numStudents, configParms.parentalDelay );
+	Parent * parent = new Parent( printer, bank, configParms.numStudents, configParms.parentalDelay );
 	Groupoff groupoff( printer, configParms.numStudents, configParms.sodaCost, configParms.groupoffDelay );
 	WATCardOffice office( printer, bank, configParms.numCouriers );
 	NameServer nameServer( printer, configParms.numVendingMachines, configParms.numStudents );
@@ -80,6 +80,7 @@ int main(int argc, char const *argv[]){
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];
 	} // for		
-cout << "returning deleting" << endl;
+	cout << "returning deleting" << endl;
+	delete parent;
 	return 0;
 }
