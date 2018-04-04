@@ -29,7 +29,7 @@ Student::Student(
 }
 
 void  Student::main() {
-  cout << id << ": " << this << endl;
+  cout << id << ": " << &main << endl;
   prt.print( Printer::Kind::Student, id, 'S', favouriteFlavourInt, numOfPurchases );
   watcard = cardOffice.create( id, 5 );
   groupOffCard = groupoff.giftCard();
