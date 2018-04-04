@@ -79,5 +79,9 @@ void  Student::main() {
 
   } // for
   if ( curCard != NULL ) delete curCard;
+  if ( watcard.available() ) {                            // handle the case that Gifcard purchases the last bottle
+    curCard = watcard();
+    delete curCard;
+  }
   prt.print( Printer::Kind::Student, id, 'F');
 } // main
