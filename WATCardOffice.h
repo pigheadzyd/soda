@@ -31,6 +31,7 @@ _Task WATCardOffice {
 	Bank & bank;
 	Courier ** courierPool;
 	std::queue<Job *> jobs;
+	unsigned int numCouriers;
 	void main();
 public:
 	_Event Lost {};                           // lost WATCard

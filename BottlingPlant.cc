@@ -31,6 +31,7 @@ BottlingPlant::BottlingPlant(
 BottlingPlant::~BottlingPlant() {
 	delete truck;
 	delete[] product;
+	prt.print( Printer::Kind::BottlingPlant, 'F' );
 }
 
 void BottlingPlant::main() {
