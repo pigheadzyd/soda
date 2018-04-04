@@ -46,6 +46,7 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 	}	// if 
 	unsigned int free = mprng( 4 );
 	if ( free == 0 ) {
+		prt.print( Printer::Kind::Vending, id, 'E');
 		_Throw Free();
 	}	// if
 	card.withdraw( sodaCost );

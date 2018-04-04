@@ -42,6 +42,7 @@ void  Student::main() {
         vendingMachine->buy( favouriteFlavour, *curGiftCard );
         prt.print( Printer::Kind::Student, id, '3');
         groupOffCard.reset();
+        prt.print( Printer::Kind::Student, id, '4');
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
         if ( watcard.available() ) { 
