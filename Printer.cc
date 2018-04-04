@@ -1,8 +1,13 @@
 #include <iostream>
-#include "Printer.h"
+
+#include "Printer.h"																		// Definition of Bottling Plant Task
 
 using namespace std;
 
+
+//--------------------------------------------------------------------------------------------------------------------
+// Starup and shutdown.
+//--------------------------------------------------------------------------------------------------------------------
 Printer::Printer( 
 	unsigned int numStudents, 
 	unsigned int numVendingMachines, 
@@ -10,6 +15,7 @@ Printer::Printer(
 numStudents( numStudents ), 
 numVendingMachines( numVendingMachines ), 
 numCouriers( numCouriers ), total( 0 ) {
+	// Adding the mapping info between State and index
 	cout << "Parent";
 	indexMap[Parent] = total++;
 
@@ -28,7 +34,7 @@ numCouriers( numCouriers ), total( 0 ) {
 	cout << '\t' << "Plant";
 	indexMap[BottlingPlant] = total++;
 
-	for ( unsigned int i = 0; i < numStudents; ++i ) {		// init student
+	for ( unsigned int i = 0; i < numStudents; ++i ) {					// init Students
 		cout << '\t' << "Stud" << i;
 	}	// for
 	indexMap[Student] = total;
@@ -40,9 +46,10 @@ numCouriers( numCouriers ), total( 0 ) {
 	indexMap[Vending] = total;
 	total += numVendingMachines;
 
-	for ( unsigned int i = 0; i < numCouriers; ++i ) {		// init Coureiers
+	for ( unsigned int i = 0; i < numCouriers; ++i ) {					// init Coureiers
 		cout << '\t' << "Cour" << i;
 	}	// for
+
 	indexMap[Courier] = total;
 	total += numCouriers;
 	cout << endl;
@@ -65,13 +72,17 @@ Printer::~Printer() {
 	cout << "***********************" << endl;
 }	// Printer::~Printer()
 
+
+//--------------------------------------------------------------------------------------------------------------------
+// Print the info in the printInfo immediately and reset the data back in the prinInfo.
+//--------------------------------------------------------------------------------------------------------------------
 void Printer::flush() {
 	for ( unsigned int i = 0; i < total; ++i ) {
 		if ( i ) {
 			cout << '\t';
 		}	// if
 
-		if ( printInfo[i].update ) {
+		if ( printInfo[i].update ) {							// If multiple of value has beed set
 			cout << printInfo[i].state;
 		}	// if
 		if ( printInfo[i].updateValue1 ) {
@@ -86,17 +97,27 @@ void Printer::flush() {
 		printInfo[i].updateValue1 = false;
 		printInfo[i].updateValue2 = false;
 	}	// for
-	cout << endl;
-}	// void Printer::flush
 
+	cout << endl;
+}	// Printer::flush
+
+
+//--------------------------------------------------------------------------------------------------------------------
+// Different methods of getIndex by given Kind with or without id option.
+//--------------------------------------------------------------------------------------------------------------------
 unsigned int Printer::getIndex( Kind kind ) {
 	return indexMap.at( kind );
-}	// unsigned int Printer::getIndex
+}	// Printer::getIndex
 
 unsigned int Printer::getIndex( Kind kind, unsigned int lid ) {
 	return indexMap.at( kind ) + lid;
-}	// unsigned int Printer::getIndex
+}	// Printer::getIndex
 
+
+//--------------------------------------------------------------------------------------------------------------------
+// Setting the corresponding state in printInfo, 
+// Difference amoung with or without value option and the number of values.
+//--------------------------------------------------------------------------------------------------------------------
 void Printer::setState( unsigned int index, char state ) {
 	if ( printInfo[index].update ) {		// check if the setState has buffer or not
 		flush();
@@ -104,29 +125,34 @@ void Printer::setState( unsigned int index, char state ) {
 
 	printInfo[index].update = true;
 	printInfo[index].state = state;
-}	// void Printer::setState
+}	// Printer::setState
 
 void Printer::setState( unsigned int index, char state, int value1 ) {
 	setState( index, state );
 	printInfo[index].updateValue1 = true;
 	printInfo[index].value1 = value1;
-}	// void Printer::setState
+}	// Printer::setState
 
 void Printer::setState( unsigned int index, char state, int value1, int value2 ) {
 	setState( index, state, value1 );
 	printInfo[index].updateValue2 = true;
 	printInfo[index].value2 = value2;
-}	// void Printer::setState
+}	// Printer::setState
 
+
+//--------------------------------------------------------------------------------------------------------------------
+// Put the state and value into printInfo buffer and waiting for print
+// Difference amoung different input numver
+//--------------------------------------------------------------------------------------------------------------------
 void Printer::print( Kind kind, char state ) {
 	unsigned int index = getIndex( kind );
 	setState( index, state );
-}	// void Printer::print
+}	// Printer::print
 
 void Printer::print( Kind kind, char state, int value1 ) {
 	unsigned int index = getIndex( kind );
 	setState( index, state, value1 );
-}	// void Printer::print
+}	// Printer::print
 
 void Printer::print( Kind kind, char state, int value1, int value2 ) {
 	unsigned int index = getIndex( kind );
@@ -136,16 +162,16 @@ void Printer::print( Kind kind, char state, int value1, int value2 ) {
 void Printer::print( Kind kind, unsigned int lid, char state ) {
 	unsigned int index = getIndex( kind, lid );
 	setState( index, state );
-}	// void Printer::print
+}	// Printer::print
 
 void Printer::print( Kind kind, unsigned int lid, char state, int value1 ) {
 	unsigned int index = getIndex( kind, lid );
 	setState( index, state, value1 );
-}	// void Printer::print
+}	// Printer::print
 
 void Printer::print( Kind kind, unsigned int lid, char state, int value1, int value2 ) {
 	unsigned int index = getIndex( kind, lid );
 	setState( index, state, value1, value2 );
-}	// void Printer::print
+}	// Printer::print
 
 
