@@ -29,7 +29,6 @@ BottlingPlant::BottlingPlant(
 	}
 
 BottlingPlant::~BottlingPlant() {
-	_Accept ( getShipment );
 	delete truck;
 	delete[] product;
 }
@@ -37,26 +36,31 @@ BottlingPlant::~BottlingPlant() {
 void BottlingPlant::main() {
 
 	for ( ;; ) {
-		_Accept( ~BottlingPlant ) {
-			shutdown = true;
-			break;
-		} _Else {
-			int total = 0;
-			for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
-				product[i] = mprng( maxShippedPerFlavour );
-				total += product[i];
-			}	// for
-			prt.print( Printer::BottlingPlant, 'G', total );
+		try {
+			_Accept( ~BottlingPlant ) {
+				shutdown = true;
+				break;
+			} _Else {
+				int total = 0;
+				for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
+					product[i] = mprng( maxShippedPerFlavour );
+					total += product[i];
+				}	// for
+				prt.print( Printer::BottlingPlant, 'G', total );
 
-			yield( timeBetweenShipments );
+				yield( timeBetweenShipments );
 
-			_Accept( getShipment );
-			prt.print( Printer::BottlingPlant, 'P' );
-			// for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
-			// 	product[i] = 0;
-			// }	// reset the value
-		}	// _Accept
+				_Accept( getShipment );
+				prt.print( Printer::BottlingPlant, 'P' );
+			}	// _Accept
+		} catch( uMutexFailure::RendezvousFailure ) {
+		}	// try
 	}	// for
+	try {
+		_Accept ( getShipment );
+	} catch( uMutexFailure::RendezvousFailure ) {
+
+	}
 }
 
 void BottlingPlant::getShipment( unsigned int cargo[] ){

@@ -56,13 +56,15 @@ int main(int argc, char const *argv[]){
 	Groupoff groupoff( printer, configParms.numStudents, configParms.sodaCost, configParms.groupoffDelay );
 	WATCardOffice office( printer, bank, configParms.numCouriers );
 	NameServer nameServer( printer, configParms.numVendingMachines, configParms.numStudents );
-	BottlingPlant bottlingPlant( printer, nameServer, configParms.numVendingMachines, 
+	BottlingPlant * bottlingPlant = new BottlingPlant( printer, nameServer, configParms.numVendingMachines, 
 		configParms.maxShippedPerFlavour, configParms.maxStockPerFlavour, configParms.timeBetweenShipments );
 
 	Student * studentList[configParms.numStudents];
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
 	} // for
+
+	delete bottlingPlant;
 
 	VendingMachine * vendingMachineList[configParms.numVendingMachines];
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
