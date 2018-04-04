@@ -75,9 +75,9 @@ int main(int argc, char const *argv[]){
 		delete studentList[i];
 	} // for	
 
-	
+	cout << "bottlingPlant deleting" << endl;
 	delete bottlingPlant;
-
+cout << "bottlingPlant deleted" << endl;
 	// for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 	// 	delete vendingMachineList[i];
 	// } // for		
