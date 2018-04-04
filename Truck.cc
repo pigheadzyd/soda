@@ -60,13 +60,13 @@ void Truck::main() {
 			for ( int j = 0; j < SODA_FLAVOUR; ++j ) {				// install all the flavour into the vending machine
 				if ( !emptyStatus[j] ) {												// if the current flavour is not empty yet
 					unsigned int rest = curStock[j];
-					unsigned int restockNum = std::min( maxStockPerFlavour - rest, product[i] );
+					unsigned int restockNum = std::min( maxStockPerFlavour - rest, product[j] );
 					// restore this kind flavour
 					product[j] -= restockNum;
 					curStock[j] += restockNum;
 					// calculate the total number
-					maxTotal -= restockNum;
-					total -= restockNum;
+					maxTotal = maxTotal - restockNum;
+					total = total - restockNum;
 				}	// if
 
 				// if the current state is empty
@@ -82,8 +82,6 @@ void Truck::main() {
 			if ( maxTotal > 0 ){
 				prt.print( Printer::Truck, 'U', vendingMachineList[curIndex]->getId(), maxTotal );
 			}	// if
-
-			curIndex = ( curIndex + 1 ) % numVendingMachines;
 			
 			// if a product in the truck is empty
 			if ( total == 0 ) {
@@ -93,9 +91,14 @@ void Truck::main() {
 				}	// for
 				break;
 			}	// if
+
+			curIndex = ( curIndex + 1 ) % numVendingMachines;
 		}	// for
 
 		prt.print( Printer::Truck, 'D', curIndex, total );
+		if ( total == 0 ) {
+			curIndex = ( curIndex + 1 ) % numVendingMachines;
+		}	// if
 	}	// for
 	prt.print( Printer::Truck, 'F' );
 }
