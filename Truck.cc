@@ -59,7 +59,7 @@ void Truck::main() {
 			break;
 		}	// try
 		prt.print( Printer::Truck, 'P', total );
-		print( "product", product[0], product[1], product[2], product[3] );
+		//print( "product", product[0], product[1], product[2], product[3] );
 		// get teh vending machine
 		VendingMachine ** vendingMachineList =  nameServer.getMachineList();
 
@@ -70,7 +70,7 @@ void Truck::main() {
 
 			unsigned int * curStock = vendingMachineList[curIndex]->inventory();
 
-			print( "Origin", curIndex, curStock[0], curStock[1], curStock[2], curStock[3] );
+			//print( "Origin", curIndex, curStock[0], curStock[1], curStock[2], curStock[3] );
 			maxTotal = SODA_FLAVOUR * maxStockPerFlavour - std::accumulate( curStock, curStock + SODA_FLAVOUR, 0 );
 
 			for ( int j = 0; j < SODA_FLAVOUR; ++j ) {				// install all the flavour into the vending machine
@@ -98,8 +98,8 @@ void Truck::main() {
 			// told the vending machine finish restock
 			vendingMachineList[curIndex]->restocked();
 
-			print( "After", curIndex, curStock[0], curStock[1], curStock[2], curStock[3] );
-			print( "T after", product[0], product[1], product[2], product[3] );
+			//print( "After", curIndex, curStock[0], curStock[1], curStock[2], curStock[3] );
+			//print( "T after", product[0], product[1], product[2], product[3] );
 			//	if it is not filled the vending machine
 			if ( maxTotal > 0 ){
 				prt.print( Printer::Truck, 'U', vendingMachineList[curIndex]->getId(), maxTotal );
@@ -114,7 +114,7 @@ void Truck::main() {
 		}	// for
 
 		prt.print( Printer::Truck, 'D', curIndex, total );
-		print( "Final", product[0], product[1], product[2], product[3] );
+		//print( "Final", product[0], product[1], product[2], product[3] );
 		// reset the value
 		for ( int j = 0; j < SODA_FLAVOUR; ++j ) {
 			emptyStatus[j] = false;
