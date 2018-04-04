@@ -20,6 +20,7 @@ Groupoff::~Groupoff() {
 	for( unsigned int i = 0; i < cardList.size() ; i++ ){
 		delete cardList[i];
 	}
+	prt.print( Printer::Groupoff, 'f' );
 }
 
 void Groupoff::main() {
