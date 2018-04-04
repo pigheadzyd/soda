@@ -71,7 +71,7 @@ WATCardOffice::~WATCardOffice() {
 	}
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
 		prt.print( Printer::Kind::WATCardOffice, 'C' );
-    // delete courierPool[i];
+    delete courierPool[i];
   }
   prt.print( Printer::Kind::WATCardOffice, 'D' );
 	// delete [] courierPool;

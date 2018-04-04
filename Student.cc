@@ -84,7 +84,7 @@ void  Student::main() {
     } // select
 
   } // for
-  if ( curCard != NULL ) delete curCard;
+  // if ( curCard != NULL ) delete curCard;
   curCard = NULL;
   prt.print( Printer::Kind::Student, id, 'F');
 } // main
