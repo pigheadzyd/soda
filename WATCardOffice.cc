@@ -55,17 +55,14 @@ prt( prt ), bank( bank ), numCouriers( numCouriers ) {
 }
 
 WATCardOffice::~WATCardOffice() {
-	prt.print( Printer::Kind::WATCardOffice, 'A' );
 	while( !jobs.empty() ) {
 		Job * j = jobs.front();
 		jobs.pop();
 		if ( j->card != NULL ) {
 			delete j->card;
-			prt.print( Printer::Kind::WATCardOffice, 'J' );
 		}
 		delete j;
 	}
-	prt.print( Printer::Kind::WATCardOffice, 'B' );
 	for ( ; ; ) {
 		_Accept( requestWork ) { 									// wake up all blocked
 		} _Else {
@@ -73,11 +70,8 @@ WATCardOffice::~WATCardOffice() {
 		}
 	}
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
-		prt.print( Printer::Kind::WATCardOffice, 'C' );
     delete courierPool[i];
   }
-  prt.print( Printer::Kind::WATCardOffice, 'D' );
-	// delete [] courierPool;
 	prt.print( Printer::Kind::WATCardOffice, 'F' );
 }
 
