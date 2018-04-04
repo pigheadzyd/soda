@@ -13,7 +13,6 @@ prt( prt ), bank( bank ), office( office ), id( id ) {
 }
 
 WATCardOffice::Courier::~Courier() {
-	prt.print( Printer::Kind::WATCardOffice, 'A' );
 }
 
 void WATCardOffice::Courier::main() {
