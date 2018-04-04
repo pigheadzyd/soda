@@ -64,6 +64,7 @@ WATCardOffice::~WATCardOffice() {
 		Job * j = jobs.front();
 		jobs.pop();
 		delete j->card;
+		j->card = NULL;
 		delete j;
 	}
 	for ( ; ; ) {
