@@ -34,12 +34,13 @@ void Groupoff::main() {
 			gc->deposit( sodaCost );
 			yield( groupoffDelay );
 			giftcards[next].delivery( gc );
+			prt.print( Printer::Groupoff, 'D', sodaCost );
 			giftcards.erase (giftcards.begin() + next );
 			remainingStudents -= 1;
 			if ( remainingStudents == 0 ) break;				// all gift card is send out
 		}
 	}
-
+	prt.print( Printer::Groupoff, 'F' );
 }
 
 WATCard::FWATCard Groupoff::giftCard(){
