@@ -31,7 +31,7 @@ void  Student::main() {
   groupOffCard = groupoff.giftCard();
   vendingMachine = nameServer.getMachine( id );
   prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
-  for(unsigned int i = 0; i < maxPurchases; ) {
+  for(unsigned int i = 0; i < numOfPurchases; ) {
     _Select( groupOffCard ) {
       try {
         curCard = groupOffCard();                         // this card is deleted here
