@@ -18,7 +18,9 @@ Groupoff::Groupoff(
 
 Groupoff::~Groupoff() {
 	for( unsigned int i = 0; i < cardList.size() ; i++ ){
+		prt.print( Printer::Groupoff, 'F', i );
 		delete cardList[i];
+		prt.print( Printer::Groupoff, 'f', i );
 	}
 	prt.print( Printer::Groupoff, 'f' );
 }
