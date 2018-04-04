@@ -34,7 +34,6 @@ BottlingPlant::~BottlingPlant() {
 }
 
 void BottlingPlant::main() {
-	prt.print( Printer::BottlingPlant, 'M' );
 	for ( ;; ) {
 		try {
 			_Accept( ~BottlingPlant ) {
