@@ -21,7 +21,7 @@ void WATCardOffice::Courier::main() {
 			break;
 		} _Else {
 			WATCardOffice::Job * job = office.requestWork();				// here the job is always asking for money
-			if( job == NULL ) continue;
+			if( job == NULL ) break;
 			WATCard * card = job->card;
 			unsigned int studentId = job->studentId;
 			unsigned int amount = job->amount;
