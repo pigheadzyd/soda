@@ -1,6 +1,7 @@
 #ifndef __WATCARDOFFICE_H__
 #define __WATCARDOFFICE_H__
 #include <queue>
+#include <vector>
 #include "WATCard.h"
 
 _Monitor Printer;
@@ -29,7 +30,7 @@ _Task WATCardOffice {
 
 	Printer & prt;
 	Bank & bank;
-	Courier ** courierPool;
+	std::vector< Courier *> courierPool;
 	std::queue<Job *> jobs;
 	unsigned int numCouriers;
 	void main();

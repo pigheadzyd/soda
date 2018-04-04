@@ -48,9 +48,9 @@ void WATCardOffice::Courier::main() {
 /************************ WATCardOffice class ************************/
 WATCardOffice::WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers ) : 
 prt( prt ), bank( bank ), numCouriers( numCouriers ) {
-  courierPool = new Courier*[numCouriers]; 
+  // courierPool = new Courier*[numCouriers]; 
   for ( unsigned int i = 0; i < numCouriers; i++ ){
-    courierPool[i] = new Courier( prt, bank, *this, i );
+    courierPool.push_back(new Courier( prt, bank, *this, i ));
   }
 }
 
@@ -74,7 +74,7 @@ WATCardOffice::~WATCardOffice() {
     delete courierPool[i];
   }
   prt.print( Printer::Kind::WATCardOffice, 'D' );
-	delete [] courierPool;
+	// delete [] courierPool;
 	prt.print( Printer::Kind::WATCardOffice, 'F' );
 }
 
