@@ -3,6 +3,7 @@
 
 _Monitor Printer;
 _Task NameServer;
+_Task Truck;
 
 _Task BottlingPlant {
   public:
@@ -22,6 +23,7 @@ _Task BottlingPlant {
   	bool shutdown;
     int SODA_FLAVOUR;
     unsigned int * product;
+    Truck * truck;
     void main();
 };
 

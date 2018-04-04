@@ -6,8 +6,14 @@
 #include "Bank.h"
 #include "Parent.h"
 #include "Printer.h"
-#include "test1.cc"
-#include "test2.cc"
+#include "BottlingPlant.h"
+#include "Groupoff.h"
+#include "WATCard.h"
+#include "WATCardOffice.h"
+#include "NameServer.h"
+#include "Truck.h"
+#include "Student.h"
+#include "VendingMachine.h"
 #include "MPRNG.h"
 
 using namespace std;
@@ -20,7 +26,7 @@ int main(int argc, char const *argv[]){
 	// command line arguement handler
 	ConfigParms configParms;
 	string tempFile = "soda.config";
-	unsigned int seed = = getpid();
+	unsigned int seed = getpid();
 
 	try {
 		switch ( argc ){
@@ -44,23 +50,34 @@ int main(int argc, char const *argv[]){
 	std::strcpy( configFile, tempFile.c_str() );
 	processConfigFile( configFile, configParms );
 
-	Printer printer ( configParms.numStudents, configParms.numVendingMachines, configParms.numCouriers );
+	Printer printer( configParms.numStudents, configParms.numVendingMachines, configParms.numCouriers );
 	Bank bank ( configParms.numStudents );
-	//Test1 test1 ( bank );
-	Parent parent ( printer, bank, configParms.numStudents, configParms.parentalDelay );
-	Test2 test2 ( printer, bank );
+	Parent parent( printer, bank, configParms.numStudents, configParms.parentalDelay );
+	Groupoff groupoff( printer, configParms.numStudents, configParms.sodaCost, configParms.groupoffDelay );
+	WATCardOffice office( printer, bank, configParms.numCouriers );
+	NameServer nameServer( printer, configParms.numVendingMachines, configParms.numStudents );
+	BottlingPlant bottlingPlant( printer, nameServer, configParms.numVendingMachines, 
+		configParms.maxShippedPerFlavour, configParms.maxStockPerFlavour, configParms.timeBetweenShipments );
 
-	// bank.deposit( 0, 1 );
-	// bank.withdraw( 0, 3 );
-	// bank.deposit( 0, 2 );
-	
+	Student * studentList[configParms.numStudents];
+	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
+		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
+	} // for
 
-	// printer.print( Printer::Parent, 'c' );
-	// printer.print( Printer::Student, 0, 'c', 1 );
-	// printer.print( Printer::Parent, 'c' );
-	// printer.print( Printer::Vending, 1, 'b', 2 );
-	// printer.print( Printer::Parent, 'c' );
+	VendingMachine * vendingMachineList[configParms.numVendingMachines];
+	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
+		vendingMachineList[i] = new VendingMachine( printer, nameServer, i, configParms.sodaCost, configParms.maxStockPerFlavour );
+	} // for
+
+
 	
+	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
+		delete studentList[i];
+	} // for	
+
+	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
+		delete vendingMachineList[i];
+	} // for		
 
 	return 0;
 }
