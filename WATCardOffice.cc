@@ -62,8 +62,9 @@ WATCardOffice::~WATCardOffice() {
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
 		_Accept( requestWork ) {
 		} _Else {}
-		prt.print( Printer::Kind::WATCardOffice, 'D' );
+		prt.print( Printer::Kind::WATCardOffice, 'D', numCouriers );
     delete courierPool[i];
+    prt.print( Printer::Kind::WATCardOffice, 'd', i );
   }
 	delete courierPool;
 	while( !jobs.empty() ) {
