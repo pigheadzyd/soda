@@ -12,7 +12,9 @@ prt( prt ), bank( bank ), office( office ), id( id ) {
 
 }
 
-WATCardOffice::Courier::~Courier() {}
+WATCardOffice::Courier::~Courier() {
+	prt.print( Printer::Kind::WATCardOffice, 'A' );
+}
 
 void WATCardOffice::Courier::main() {
 	prt.print( Printer::Kind::Courier, id, 'S' );
@@ -56,6 +58,7 @@ prt( prt ), bank( bank ), numCouriers( numCouriers ) {
 WATCardOffice::~WATCardOffice() {
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
 		_Accept( requestWork );
+		prt.print( Printer::Kind::WATCardOffice, 'D' );
     delete courierPool[i];
   }
 	delete courierPool;
