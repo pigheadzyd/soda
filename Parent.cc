@@ -30,7 +30,7 @@ void Parent::main() {
 			yield( parentalDelay );
 			unsigned int id = mprng( numStudents - 1 );
 			unsigned int amount = mprng ( 1, 3 );
-			prt.print( Printer::Parent, '0')
+			prt.print( Printer::Parent, '0');
 			bank.deposit( id, amount );
 			prt.print( Printer::Parent, 'D', id, amount );
 		}	// _Accept
