@@ -1,16 +1,19 @@
-#include "Student.h"
+#include <iostream>
+
+#include "Student.h"                                // Definition of Bottling Plant Task
 #include "Printer.h"
 #include "NameServer.h"
 #include "WATCardOffice.h"
 #include "Groupoff.h"
 #include "VendingMachine.h"
 #include "MPRNG.h"
-#include <iostream>
 
 using namespace std;
 
-// extern MPRNG mprng;
 
+//--------------------------------------------------------------------------------------------------------------------
+// Starup and shutdown.
+//--------------------------------------------------------------------------------------------------------------------
 Student::Student( 
 	Printer & prt, 
 	NameServer & nameServer, 
@@ -22,10 +25,14 @@ Student::Student(
 	cardOffice( cardOffice ), groupoff( groupoff ),
 	id ( id ), maxPurchases( maxPurchases ){
 
-  numOfPurchases = mprng(1, maxPurchases);
-  favouriteFlavourInt = mprng(3);
-  favouriteFlavour = (VendingMachine::Flavours) favouriteFlavourInt;  // four favourite flavours
+  numOfPurchases = mprng( 1, maxPurchases );        // Determine the number will purchase
+  favouriteFlavourInt = mprng( 3 );                 // Determine the favourite flavour
+  favouriteFlavour = ( VendingMachine::Flavours ) favouriteFlavourInt;  // Four favourite flavours
 
+}
+
+Student::~Student() {
+  prt.print( Printer::Kind::Student, id, 'F');
 }
 
 void  Student::main() {
@@ -35,7 +42,7 @@ void  Student::main() {
   groupOffCard = groupoff.giftCard();
   vendingMachine = nameServer.getMachine( id );
   prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
-  for(unsigned int i = 0; i < numOfPurchases; ) {
+  for( unsigned int i = 0; i < numOfPurchases; ) {
     _Select( groupOffCard ) {
       try {
         curCard = groupOffCard();                         // all gift cards are deleted by group off at last
@@ -86,5 +93,4 @@ void  Student::main() {
     delete curCard;
   } catch ( WATCardOffice::Lost lostEvent ) {
   }
-  prt.print( Printer::Kind::Student, id, 'F');
 } // main

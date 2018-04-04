@@ -24,10 +24,6 @@ BottlingPlant::BottlingPlant(
 	timeBetweenShipments( timeBetweenShipments ),
 	shutdown( false ), SODA_FLAVOUR( 4 ) {
 		product = new unsigned int [SODA_FLAVOUR];
-		prt.print( Printer::BottlingPlant, 'S' );
-
-		// create a new truck
-		truck = new Truck( prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
 }
 
 BottlingPlant::~BottlingPlant() {
@@ -41,6 +37,10 @@ BottlingPlant::~BottlingPlant() {
 // Loop to generate products until the destroctor is called.
 //--------------------------------------------------------------------------------------------------------------------
 void BottlingPlant::main() {
+	prt.print( Printer::BottlingPlant, 'S' );
+	// create a new truck
+	truck = new Truck( prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
+	
 	for ( ;; ) {
 		try {
 			_Accept( ~BottlingPlant ) {											// Accept the destuctor to break the loop
