@@ -44,7 +44,7 @@ void  Student::main() {
           try {                           // handle the case that Gifcard purchases the last bottle
             curCard = watcard();
           } catch ( WATCardOffice::Lost lostEvent ) {
-            curCard = NULL;
+            // curCard = NULL;
           }
         }
       } catch ( VendingMachine::Free freeEvent ) {
