@@ -1,13 +1,15 @@
-#include <algorithm>
+#include <algorithm>														// Defines std::copy
 
-#include "BottlingPlant.h"
+#include "BottlingPlant.h"											// Definition of Bank monitor
 #include "Printer.h"
 #include "NameServer.h"
 #include "Truck.h"
 #include "MPRNG.h"
 
-extern MPRNG mprng;
 
+//--------------------------------------------------------------------------------------------------------------------
+// Starup and shutdown.
+//--------------------------------------------------------------------------------------------------------------------
 BottlingPlant::BottlingPlant( 
 	Printer & prt, 
 	NameServer & nameServer, 
@@ -26,7 +28,7 @@ BottlingPlant::BottlingPlant(
 
 		// create a new truck
 		truck = new Truck( prt, nameServer, *this, numVendingMachines, maxStockPerFlavour );
-	}
+}
 
 BottlingPlant::~BottlingPlant() {
 	delete truck;
@@ -34,15 +36,19 @@ BottlingPlant::~BottlingPlant() {
 	prt.print( Printer::Kind::BottlingPlant, 'F' );
 }
 
+
+//--------------------------------------------------------------------------------------------------------------------
+// Loop to generate products until the destroctor is called.
+//--------------------------------------------------------------------------------------------------------------------
 void BottlingPlant::main() {
 	for ( ;; ) {
 		try {
-			_Accept( ~BottlingPlant ) {
+			_Accept( ~BottlingPlant ) {											// If the destrctor is called, break the loop
 				shutdown = true;
 				break;
 			} _Else {
 				int total = 0;
-				for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
+				for ( int i = 0; i < SODA_FLAVOUR; ++i ) {		// For each kind of flavour randomly generate the product
 					product[i] = mprng( maxShippedPerFlavour );
 					total += product[i];
 				}	// for
@@ -51,7 +57,7 @@ void BottlingPlant::main() {
 
 				yield( timeBetweenShipments );
 
-				_Accept( getShipment );
+				_Accept( getShipment );												// Do not proceed to the next product until the truck pick up
 				prt.print( Printer::BottlingPlant, 'P' );
 			}	// _Accept
 		} catch( uMutexFailure::RendezvousFailure ) {
@@ -59,15 +65,19 @@ void BottlingPlant::main() {
 	}	// for
 
 	try {
-		_Accept ( getShipment );
-	} catch( uMutexFailure::RendezvousFailure ) {
+		_Accept ( getShipment );													// To inform the truck the bottling plant is shutdown
+	} catch( uMutexFailure::RendezvousFailure ) {				// Catch the exception
+	}	// try
+}	// BottlingPlant::main
 
-	}
-}
 
+//--------------------------------------------------------------------------------------------------------------------
+// Move the product onto the truck.
+//--------------------------------------------------------------------------------------------------------------------
 void BottlingPlant::getShipment( unsigned int cargo[] ){
-	if ( shutdown ) {
-		_Throw Shutdown();
+	if ( shutdown ) {																		// If the bottling plant is shutdown
+		_Throw Shutdown();																// Throw an exception
 	}	// if
-	std::copy( product, product + SODA_FLAVOUR, cargo );
-}
+	std::copy( product, product + SODA_FLAVOUR, cargo );// Copy the product into the truck
+}	// BottlingPlant::getShipment
+

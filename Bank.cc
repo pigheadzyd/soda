@@ -22,7 +22,7 @@ Bank::~Bank() {
 
 
 //--------------------------------------------------------------------------------------------------------------------
-// Deposit the amount money into the id student 
+// Deposit the amount money into the id student.
 //--------------------------------------------------------------------------------------------------------------------
 void Bank::deposit( unsigned int id, unsigned int amount ) {
 	studentBalance[id] += amount;
@@ -33,7 +33,7 @@ void Bank::deposit( unsigned int id, unsigned int amount ) {
 
 
 //--------------------------------------------------------------------------------------------------------------------
-// Withdraw the amount money from the id student 
+// Withdraw the amount money from the id student.
 //--------------------------------------------------------------------------------------------------------------------
 void Bank::withdraw( unsigned int id, unsigned int amount ){
 	while ( studentBalance[id] < amount ) {									// Waiting until get the balance has enough money
