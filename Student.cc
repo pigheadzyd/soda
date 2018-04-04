@@ -29,7 +29,7 @@ Student::Student(
 }
 
 void  Student::main() {
-  cout << id << ": " << &main << endl;
+
   prt.print( Printer::Kind::Student, id, 'S', favouriteFlavourInt, numOfPurchases );
   watcard = cardOffice.create( id, 5 );
   groupOffCard = groupoff.giftCard();
@@ -49,7 +49,7 @@ void  Student::main() {
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
         i += 1;
         prt.print( Printer::Kind::Student, id, 'g');
-        groupOffCard.reset();
+        // groupOffCard.reset();
       } catch ( VendingMachine::Free freeEvent ) {
         prt.print( Printer::Kind::Student, id, '4');
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
@@ -59,7 +59,7 @@ void  Student::main() {
         vendingMachine = nameServer.getMachine( id );     // get the new machine
         prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId());
       }
-
+      if ( curGiftCard->getBalance() == 0 ) groupOffCard.reset();
     } or _Select( watcard ) {
       try {
         curCard = watcard();                              // this card should be deleted in gift card class?
