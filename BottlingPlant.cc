@@ -34,18 +34,23 @@ BottlingPlant::~BottlingPlant() {
 }
 
 void BottlingPlant::main() {
-
+	prt.print( Printer::BottlingPlant, 'M' );
 	for ( ;; ) {
+		prt.print( Printer::BottlingPlant, '1' );
 		try {
+			prt.print( Printer::BottlingPlant, '3' );
 			_Accept( ~BottlingPlant ) {
+				prt.print( Printer::BottlingPlant, '4' );
 				shutdown = true;
 				break;
 			} _Else {
 				int total = 0;
+				prt.print( Printer::BottlingPlant, '2' );
 				for ( int i = 0; i < SODA_FLAVOUR; ++i ) {
 					product[i] = mprng( maxShippedPerFlavour );
 					total += product[i];
 				}	// for
+
 				prt.print( Printer::BottlingPlant, 'G', total );
 
 				yield( timeBetweenShipments );
@@ -56,6 +61,7 @@ void BottlingPlant::main() {
 		} catch( uMutexFailure::RendezvousFailure ) {
 		}	// try
 	}	// for
+
 	try {
 		_Accept ( getShipment );
 	} catch( uMutexFailure::RendezvousFailure ) {

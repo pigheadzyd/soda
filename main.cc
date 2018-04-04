@@ -64,8 +64,6 @@ int main(int argc, char const *argv[]){
 		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
 	} // for
 
-	delete bottlingPlant;
-
 	VendingMachine * vendingMachineList[configParms.numVendingMachines];
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		vendingMachineList[i] = new VendingMachine( printer, nameServer, i, configParms.sodaCost, configParms.maxStockPerFlavour );
@@ -76,6 +74,9 @@ int main(int argc, char const *argv[]){
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		delete studentList[i];
 	} // for	
+
+	
+	delete bottlingPlant;
 
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];

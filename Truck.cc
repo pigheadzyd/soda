@@ -97,4 +97,5 @@ void Truck::main() {
 
 		prt.print( Printer::Truck, 'D', curIndex, total );
 	}	// for
+	prt.print( Printer::Truck, 'F' );
 }
