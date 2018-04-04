@@ -30,6 +30,7 @@ _Task WATCardOffice {
 
 	Printer & prt;
 	Bank & bank;
+	std::vector< WATCard *> cardPool;
 	std::vector< Courier *> courierPool;
 	std::queue<Job *> jobs;
 	unsigned int numCouriers;
