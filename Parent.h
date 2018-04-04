@@ -12,11 +12,11 @@ _Task Parent {
 		Parent( Printer & prt, Bank & bank, unsigned int numStudents, unsigned int parentalDelay );
 		~Parent();
   private:
-  	Printer & prt;
-  	Bank & bank;
-  	unsigned int numStudents;
-  	unsigned int parentalDelay;
-  	void main();
+  	Printer & prt;								// Current printer
+  	Bank & bank;									// Current bank
+  	unsigned int numStudents;			// Total number of students
+  	unsigned int parentalDelay;		// Interval for parent sending money
+  	void main();									// Main body of task
 };
 
 #endif

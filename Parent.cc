@@ -1,10 +1,12 @@
-#include "Parent.h"
+#include "Parent.h"										// Definition of Bottling Plant Task
 #include "Printer.h"
 #include "Bank.h"
 #include "MPRNG.h"
 
-extern MPRNG mprng;
 
+//--------------------------------------------------------------------------------------------------------------------
+// Starup and shutdown.
+//--------------------------------------------------------------------------------------------------------------------
 Parent::Parent( 
 	Printer & prt, 
 	Bank & bank, 
@@ -19,18 +21,22 @@ Parent::~Parent() {
 	prt.print( Printer::Parent, 'F' );
 }	// Parent::~Parent
 
-
+//--------------------------------------------------------------------------------------------------------------------
+// Continue sending money to random student by random amount
+//--------------------------------------------------------------------------------------------------------------------
 void Parent::main() {
 	prt.print( Printer::Parent, 'S' );
+
 	for ( ;; ) {
-		_Accept ( ~Parent ) {		// allow to break the loop
+		_Accept ( ~Parent ) {									// Accept the destuctor to break the loop
 			break;
 		} _Else {
 			yield( parentalDelay );
 			unsigned int id = mprng( numStudents - 1 );
 			unsigned int amount = mprng ( 1, 3 );
-			bank.deposit( id, amount );
+
+			bank.deposit( id, amount );					// Deposit the amount to the student's balance
 			prt.print( Printer::Parent, 'D', id, amount );
 		}	// _Accept
 	}	// for
-}	// void Parent::main
+}	// Parent::main
