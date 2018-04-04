@@ -66,9 +66,14 @@ WATCardOffice::~WATCardOffice() {
 		delete j->card;
 		delete j;
 	}
+	for ( ; ; ) {
+		_Accept( requestWork ) { 									// wake up all blocked
+		} _Else {
+			break;
+		}
+	}
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
-		_Accept( requestWork ) {
-		} _Else {}
+		 
 		prt.print( Printer::Kind::WATCardOffice, 'D', numCouriers );
     delete courierPool[i];
     prt.print( Printer::Kind::WATCardOffice, 'd', i );
