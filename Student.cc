@@ -97,6 +97,7 @@ void Student::main() {
     } // _Select
 
   } // for
+  
   try {                                                   // Handle the case that Gifcard purchases the last bottle
     curCard = watcard();
     delete curCard;
