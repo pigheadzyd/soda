@@ -46,7 +46,7 @@ void WATCardOffice::Courier::main() {
 
 /************************ WATCardOffice class ************************/
 WATCardOffice::WATCardOffice( Printer & prt, Bank & bank, unsigned int numCouriers ) : 
-prt( prt ), bank( bank ) {
+prt( prt ), bank( bank ), numCouriers( numCouriers ) {
   courierPool = new Courier*[numCouriers]; 
   for ( unsigned int i = 0; i < numCouriers; i++ ){
     courierPool[i] = new Courier( prt, bank, *this, i );
