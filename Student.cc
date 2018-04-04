@@ -35,11 +35,11 @@ void  Student::main() {
     prt.print( Printer::Kind::Student, id, '?');
     _Select( groupOffCard ) {
       try {
-        curGiftCard = groupOffCard();                         // all gift cards are deleted by group off at last
+        curCard = groupOffCard();                         // all gift cards are deleted by group off at last
         yield(mprng(1,10));
-        vendingMachine->buy( favouriteFlavour, *curGiftCard );
+        vendingMachine->buy( favouriteFlavour, *curCard );
         groupOffCard.reset();
-        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curGiftCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
         i += 1;
         if ( watcard.available() ) { 
           try {                           // handle the case that Gifcard purchases the last bottle
@@ -49,7 +49,7 @@ void  Student::main() {
           }
         }
       } catch ( VendingMachine::Free freeEvent ) {
-        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curGiftCard->getBalance() );
+        prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
         yield(4);
         i += 1;                                           // +1 because one consumed
       } catch ( VendingMachine::Stock stockEvent ) {
