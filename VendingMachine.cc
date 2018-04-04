@@ -45,7 +45,7 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 		_Throw Stock();
 	}	// if 
 	unsigned int free = mprng( 4 );
-	if ( free ) {
+	if ( free == 0 ) {
 		_Throw Free();
 	}	// if
 	card.withdraw( sodaCost );
@@ -56,17 +56,23 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 void VendingMachine::main() {
 	prt.print( Printer::Vending, 'S', sodaCost );
 	for ( ;; ) {
-		_Accept( ~VendingMachine ) {
-			break;
-		} or _Accept( buy ) {
+		try {
+			_Accept( ~VendingMachine ) {
+				break;
+			} or _Accept( buy ) {
 
-		} or _Accept( inventory ) {
-			prt.print( Printer::Vending, 'r' );
-			_Accept ( restocked ) {
-				prt.print( Printer::Vending, 'R' );
-			}
-		}
-	}
+			} or _Accept( inventory ) {
+
+				prt.print( Printer::Vending, 'r' );
+
+				_Accept ( restocked ) {
+					prt.print( Printer::Vending, 'R' );
+				}	// _Accept
+			}	// _Accept
+		} catch ( uMutexFailure::RendezvousFailure ) {
+
+		}	// try
+	}	// for
 }
 
 unsigned int * VendingMachine::inventory(){
