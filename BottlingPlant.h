@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------------------------------------
-// Define the interface to the Bottling task for the vending machine system.
+// Define the interface to the BottlingPlant Task for the vending machine system.
 //--------------------------------------------------------------------------------------------------------------------
 #ifndef __BOTTLINGPLANT_H__
 #define __BOTTLINGPLANT_H__

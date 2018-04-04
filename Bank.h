@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------------------------------------
-// Define the interface to the bank monitor for the vending machine system.
+// Define the interface to the Bank Monitor for the vending machine system.
 //--------------------------------------------------------------------------------------------------------------------
 
 #ifndef __BANK_H__

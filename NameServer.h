@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------------------------------------
-// Define the interface to the NameServer monitor for the vending machine system.
+// Define the interface to the NameServer Monitor for the vending machine system.
 //--------------------------------------------------------------------------------------------------------------------
 #ifndef __NAMESERVER_H__
 #define __NAMESERVER_H__

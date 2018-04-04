@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------------------------------------------------------
-// Define the interface to the groupoff task for the vending machine system.
+// Define the interface to the Groupoff Task for the vending machine system.
 //--------------------------------------------------------------------------------------------------------------------
 
 #ifndef __GROUPOFF_H__

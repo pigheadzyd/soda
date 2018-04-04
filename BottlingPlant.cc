@@ -43,7 +43,7 @@ BottlingPlant::~BottlingPlant() {
 void BottlingPlant::main() {
 	for ( ;; ) {
 		try {
-			_Accept( ~BottlingPlant ) {											// If the destrctor is called, break the loop
+			_Accept( ~BottlingPlant ) {											// Accept the destuctor to break the loop
 				shutdown = true;
 				break;
 			} _Else {
