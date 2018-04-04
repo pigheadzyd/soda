@@ -1,6 +1,6 @@
 #ifndef __TRUCK_H__
 #define __TRUCK_H__
-
+#include <string>
 _Monitor Printer;
 _Task NameServer;
 _Task BottlingPlant;
@@ -23,6 +23,8 @@ _Task Truck {
     unsigned int * product;
     bool * emptyStatus;
     void main();
+    void print( std::string kind, int value1, int value2, int value3, int value4 );
+    void print( std::string kind, unsigned int id, int value1, int value2, int value3, int value4 );
 };
 
 #endif
