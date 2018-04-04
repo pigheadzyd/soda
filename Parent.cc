@@ -16,7 +16,7 @@ Parent::Parent(
 }	// Parent::Parent
 
 Parent::~Parent() {
-	prt.print( Printer::Parent, 'F' );
+	// prt.print( Printer::Parent, 'F' );
 }	// Parent::~Parent
 
 
