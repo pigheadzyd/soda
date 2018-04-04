@@ -90,6 +90,7 @@ void  Student::main() {
     }
   }
   if ( curCard != NULL ) {
+    prt.print( Printer::Kind::Student, id, 'g');
     delete curCard;
     prt.print( Printer::Kind::Student, id, 'f');
   }
