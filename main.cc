@@ -69,8 +69,6 @@ int main(int argc, char const *argv[]){
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		studentList[i] = new Student( printer, nameServer, office, groupoff, i, configParms.maxPurchases );
 	} // for
-
-
 	
 	for ( unsigned int i = 0; i < configParms.numStudents; ++i ) {
 		delete studentList[i];
@@ -80,7 +78,6 @@ int main(int argc, char const *argv[]){
 
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];
-	} // for		
-// cout << "returning deleting" << endl;
+	} // for
 	return 0;
 }

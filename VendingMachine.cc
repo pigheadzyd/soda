@@ -47,6 +47,7 @@ void VendingMachine::buy( Flavours flavour, WATCard & card ) {
 	unsigned int free = mprng( 4 );
 	if ( free == 0 ) {
 		prt.print( Printer::Kind::Vending, id, 'E');
+		curStock[flavourIndex]--;
 		_Throw Free();
 	}	// if
 	card.withdraw( sodaCost );
