@@ -22,12 +22,14 @@ void WATCardOffice::Courier::main() {
 		_Accept (~Courier) {
 			break;
 		} _Else {
+			prt.print( Printer::Kind::Courier, id, 'R' );
 			WATCardOffice::Job * job = office.requestWork();				// here the job is always asking for money
 			if( job == NULL ) break;															// if job is null, that means office is closed
 			WATCard * card = job->card;
 			unsigned int studentId = job->studentId;
 			unsigned int amount = job->amount;
 			prt.print( Printer::Kind::Courier, id, 't', studentId, amount );
+			prt.print( Printer::Kind::Courier, id, 'B' );
 			bank.withdraw( studentId, amount );											// should wait until fund is sufficient
 			card->deposit(amount);
 			if( mprng(5) == 0 ) {																		// card lost
@@ -39,6 +41,7 @@ void WATCardOffice::Courier::main() {
 				job->result.delivery( card );
 				prt.print( Printer::Kind::Courier, id, 'T', studentId, amount );
 			}
+			prt.print( Printer::Kind::Courier, id, 'J' );
 			delete job;
 		}
 		
