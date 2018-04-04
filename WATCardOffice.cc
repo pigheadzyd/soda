@@ -55,8 +55,7 @@ prt( prt ), bank( bank ), numCouriers( numCouriers ) {
 
 WATCardOffice::~WATCardOffice() {
 	for ( unsigned int i = 0; i < numCouriers; i++ ) {
-		_Accept( requestWork ) {
-		} _Else {}
+		_Accept( requestWork );
     delete courierPool[i];
   }
 	delete courierPool;
