@@ -54,8 +54,8 @@ int main(int argc, char const *argv[]){
 	Bank bank ( configParms.numStudents );
 	Parent * parent = new Parent( printer, bank, configParms.numStudents, configParms.parentalDelay );
 	Groupoff groupoff( printer, configParms.numStudents, configParms.sodaCost, configParms.groupoffDelay );
-	WATCardOffice office( printer, bank, configParms.numCouriers );
-	NameServer nameServer( printer, configParms.numVendingMachines, configParms.numStudents );
+	WATCardOffice * office = new WATCardOffice( printer, bank, configParms.numCouriers );
+	NameServer * nameServer = new NameServer( printer, configParms.numVendingMachines, configParms.numStudents );
 	BottlingPlant * bottlingPlant = new BottlingPlant( printer, nameServer, configParms.numVendingMachines, 
 		configParms.maxShippedPerFlavour, configParms.maxStockPerFlavour, configParms.timeBetweenShipments );
 
@@ -80,8 +80,12 @@ int main(int argc, char const *argv[]){
 	for ( unsigned int i = 0; i < configParms.numVendingMachines; ++i ) {
 		delete vendingMachineList[i];
 	} // for		
+	cout << "parent deleting" << endl;
 	delete parent;
-	
-	cout << "returning deleting" << endl;
+	cout << "office deleting" << endl;
+	delete office;
+	cout << "nameServer deleting" << endl;
+	delete nameServer;
+	cout << "returning" << endl;
 	return 0;
 }
