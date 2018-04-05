@@ -43,14 +43,14 @@ Student::~Student() {
 void Student::main() {
 
   prt.print( Printer::Kind::Student, id, 'S', favouriteFlavourInt, numOfPurchases );
-  watcard = cardOffice.create( id, 5 );                  // Create a new WATCard
-  groupOffCard = groupoff.giftCard();                    // Require for a giftcard
+  watcard = cardOffice.create( id, 5 );                   // Create a new WATCard
+  groupOffCard = groupoff.giftCard();                     // Require for a giftcard
 
   vendingMachine = nameServer.getMachine( id );     
   prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId() );
 
   for( unsigned int i = 0; i < numOfPurchases; ) {
-    _Select( groupOffCard ) {                             // Case of using giftcard to purchase???
+    _Select( groupOffCard ) {                             // If giftcard is ready, use it as purchasing method
       try {
         curCard = groupOffCard();                         // Set the purchase cardtype
         yield( mprng( 1,10 ) );
@@ -59,7 +59,7 @@ void Student::main() {
         prt.print( Printer::Kind::Student, id, 'G', favouriteFlavourInt, curCard->getBalance() );
 
         i += 1;                                           // Successfully purchase without special case
-        groupOffCard.reset();
+        groupOffCard.reset();                             // Reset to avoid future use
         curCard = NULL;
       } catch ( VendingMachine::Free freeEvent ) {        // If this purchase is free
         prt.print( Printer::Kind::Student, id, 'a', favouriteFlavourInt, curCard->getBalance() );
@@ -69,9 +69,7 @@ void Student::main() {
         vendingMachine = nameServer.getMachine( id );     // Get the new machine
         prt.print( Printer::Kind::Student, id, 'V', vendingMachine->getId() );
       } // try
-      // ??? if no bug then delete (next line)
-      // if ( curGiftCard->getBalance() == 0 ) groupOffCard.reset();
-    } or _Select( watcard ) {                             // Case of using WATCard to purchase??? 
+    } or _Select( watcard ) {                             // If watcard is ready, use it as purchasing method
       try {
         curCard = watcard();                              // Set the purchase cardtype
         yield( mprng( 1, 10 ) );

@@ -14,11 +14,11 @@ _Task WATCardOffice {
 	struct Job {                              // marshalled arguments and return future
 		unsigned int studentId;
 		unsigned int amount;
-		WATCard * card;
+		WATCard * card;													// Student's watcard
 		WATCard::FWATCard result;             	// return future
 		Job( unsigned int studentId, unsigned int amount, WATCard * card ) 
 		: studentId( studentId ), amount( amount ), card( card ) {}
-	};																				// ???												
+	};																				// Infomation for courier	
 
 	_Task Courier { 
 		Printer & prt;
@@ -33,8 +33,8 @@ _Task WATCardOffice {
 
 	Printer & prt;														// Current printer
 	Bank & bank;															// Current bank
-	std::vector< Courier *> courierPool;			// ???
-	std::queue<Job *> jobs;										// ???
+	std::vector< Courier *> courierPool;			// Pool for couriers
+	std::queue<Job *> jobs;										// List of available jobs
 	unsigned int numCouriers;									// Total number of couriers
 	void main();												  		// Main body of task
 public:
@@ -43,7 +43,7 @@ public:
 	~WATCardOffice();
 	WATCard::FWATCard create( unsigned int sid, unsigned int amount );		// For creating a new WATCard
 	WATCard::FWATCard transfer( unsigned int sid, unsigned int amount, WATCard * card );	// For transfer the money into WATCard
-	Job * requestWork();											// ???
+	Job * requestWork();											// Called by courier to get the first available job
 };
 
 #endif

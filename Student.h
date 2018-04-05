@@ -27,12 +27,12 @@ _Task Student {
 
     unsigned int numOfPurchases;								// Number of soda that the  student purchase 
     VendingMachine::Flavours favouriteFlavour;	// Favourite flavour of the 
-    unsigned int favouriteFlavourInt;						// Corresponding index of the flavour???
+    unsigned int favouriteFlavourInt;						// Int value of favourite flavour
     VendingMachine * vendingMachine;						// Student current using vending machine
 
     WATCard::FWATCard watcard;									// Student current watcard
     WATCard::FWATCard groupOffCard;							// Student groupoff card
-    WATCard * curCard;													// Card that student will use to purchase???
+    WATCard * curCard;													// Card that student will use to purchase, either giftcard or watcard
 
 };
 

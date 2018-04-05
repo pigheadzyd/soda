@@ -45,7 +45,7 @@ void Groupoff::main() {
 			break;
 		} _Else {
 			assert( remainingStudents == giftcards.size() );
-			int next = mprng( remainingStudents - 1 );							// Get the next giftcard to be sent
+			int next = mprng( remainingStudents - 1 );							// Get the next giftcard to be sent randomly
 
 			WATCard * gc = new WATCard();														// Create a real WATCard and deposit the money
 			cardList.push_back( gc );
@@ -55,7 +55,7 @@ void Groupoff::main() {
 			giftcards[next].delivery( gc );													// Send the WATCard out
 			prt.print( Printer::Groupoff, 'D', sodaCost );
 
-			giftcards.erase( giftcards.begin() + next );						// ???
+			giftcards.erase( giftcards.begin() + next );						// Remove giftcard from the list as it was sent out
 			remainingStudents -= 1;
 			if ( remainingStudents == 0 ) break;										// If all gift card is send out
 		}	// _Accept
