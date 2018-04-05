@@ -86,6 +86,8 @@ void Truck::main() {
 				prt.print( Printer::Truck, 'U', vendingMachineList[curIndex]->getId(), maxTotal );
 			}	// if
 			
+			prt.print( Printer::Truck, 'D', curIndex, total );
+
 			if ( total == 0 ) {																				// If truck is empty
 				break;
 			}	// if
@@ -93,7 +95,7 @@ void Truck::main() {
 			curIndex = ( curIndex + 1 ) % numVendingMachines;					// Move to next vending machine
 		}	// for
 
-		prt.print( Printer::Truck, 'D', curIndex, total );
+		
 		
 		for ( int j = 0; j < SODA_FLAVOUR; ++j ) {									// Reset the value
 			emptyStatus[j] = false;
