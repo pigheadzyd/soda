@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Printer.h"																		// Definition of Bottling Plant Task
+#include "Printer.h"																		// Definition of Printer Monitor
 
 using namespace std;
 

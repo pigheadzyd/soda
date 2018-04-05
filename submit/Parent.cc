@@ -1,4 +1,4 @@
-#include "Parent.h"										// Definition of Bottling Plant Task
+#include "Parent.h"										// Definition of Parent Monitor
 #include "Printer.h"
 #include "Bank.h"
 #include "MPRNG.h"

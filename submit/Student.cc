@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Student.h"                                // Definition of Bottling Plant Task
+#include "Student.h"                                // Definition of Student Task
 #include "Printer.h"
 #include "NameServer.h"
 #include "WATCardOffice.h"
